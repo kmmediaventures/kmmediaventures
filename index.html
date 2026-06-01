@@ -42,7 +42,7 @@
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>Welcome to KM Media Ventures! I'm a passionate photographer and videographer dedicated to capturing your most precious moments and creating compelling visual stories. With years of expe[...]
+            <p>Welcome to KM Media Ventures! I'm a passionate photographer and videographer dedicated to capturing your most precious moments and creating compelling visual stories. With years of [...]
             <div class="about-features">
                 <div class="feature">
                     <i class="fas fa-camera"></i>
@@ -140,11 +140,11 @@
         <div class="container">
             <h2>Get in Touch</h2>
             <p>Ready to work together? Let's create something amazing!</p>
-            <form class="contact-form" id="contactForm">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <input type="text" placeholder="Subject" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
+            <form class="contact-form" id="contactForm" method="POST" action="https://formspree.io/f/xdkpqnrj">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                 <button type="submit" class="submit-button">Send Message</button>
             </form>
             <div class="contact-info">
