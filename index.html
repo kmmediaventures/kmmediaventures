@@ -45,7 +45,7 @@
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>Welcome to KM Media Ventures! I'm a passionate photographer and videographer dedicated to capturing your most precious moments and creating compelling visual stories. With years of experience in photography and videography, I specialize in creating high-quality images and videos that tell your unique story. Whether it's a wedding, corporate event, product shoot, or personal project, I bring creativity, professionalism, and attention to detail to every project.</p>
+            <p>Welcome to KM Media Ventures! I'm a passionate photographer and videographer dedicated to capturing your most precious moments and creating compelling visual stories. With years of experience in multiple photography genres, I deliver exceptional quality across all project types.</p>
             <div class="about-features">
                 <div class="feature">
                     <i class="fas fa-camera"></i>
@@ -70,46 +70,123 @@
     <section id="photography" class="gallery-section">
         <div class="container">
             <h2>Photography Portfolio</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+1" alt="Portrait Photography Sample">
+            
+            <!-- Gallery Filter Buttons -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="portraits">PORTRAITS</button>
+                <button class="filter-btn" data-filter="music">MUSIC PERFORMANCES</button>
+                <button class="filter-btn" data-filter="sports">SPORTS</button>
+                <button class="filter-btn" data-filter="wildlife">WILDLIFE</button>
+                <button class="filter-btn" data-filter="events">EVENTS</button>
+                <button class="filter-btn" data-filter="artistic">ARTISTIC</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Portraits -->
+                <div class="gallery-item" data-category="portraits">
+                    <img src="https://via.placeholder.com/400x300?text=Portrait+1" alt="Portrait Photography Sample" loading="lazy">
                     <div class="gallery-overlay">
                         <p>Portrait Photography</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+2" alt="Event Photography Sample">
+
+                <!-- Music Performances -->
+                <div class="gallery-item" data-category="music">
+                    <img src="https://via.placeholder.com/400x300?text=Music+Performance+1" alt="Music Performance Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Music Performance</p>
+                    </div>
+                </div>
+
+                <!-- Sports -->
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://via.placeholder.com/400x300?text=Sports+1" alt="Sports Photography Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Sports Photography</p>
+                    </div>
+                </div>
+
+                <!-- Wildlife -->
+                <div class="gallery-item" data-category="wildlife">
+                    <img src="https://via.placeholder.com/400x300?text=Wildlife+1" alt="Wildlife Photography Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Wildlife Photography</p>
+                    </div>
+                </div>
+
+                <!-- Events -->
+                <div class="gallery-item" data-category="events">
+                    <img src="https://via.placeholder.com/400x300?text=Event+1" alt="Event Photography Sample" loading="lazy">
                     <div class="gallery-overlay">
                         <p>Event Photography</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+3" alt="Landscape Photography Sample">
+
+                <!-- Artistic -->
+                <div class="gallery-item" data-category="artistic">
+                    <img src="https://via.placeholder.com/400x300?text=Artistic+1" alt="Artistic Photography Sample" loading="lazy">
                     <div class="gallery-overlay">
-                        <p>Landscape Photography</p>
+                        <p>Artistic Photography</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+4" alt="Product Photography Sample">
+
+                <!-- Additional items for each category -->
+                <div class="gallery-item" data-category="portraits">
+                    <img src="https://via.placeholder.com/400x300?text=Portrait+2" alt="Portrait Photography Sample" loading="lazy">
                     <div class="gallery-overlay">
-                        <p>Product Photography</p>
+                        <p>Portrait Photography</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+5" alt="Wedding Photography Sample">
+
+                <div class="gallery-item" data-category="music">
+                    <img src="https://via.placeholder.com/400x300?text=Music+Performance+2" alt="Music Performance Sample" loading="lazy">
                     <div class="gallery-overlay">
-                        <p>Wedding Photography</p>
+                        <p>Music Performance</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/400x300?text=Photo+6" alt="Studio Photography Sample">
+
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://via.placeholder.com/400x300?text=Sports+2" alt="Sports Photography Sample" loading="lazy">
                     <div class="gallery-overlay">
-                        <p>Studio Photography</p>
+                        <p>Sports Photography</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="wildlife">
+                    <img src="https://via.placeholder.com/400x300?text=Wildlife+2" alt="Wildlife Photography Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Wildlife Photography</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events">
+                    <img src="https://via.placeholder.com/400x300?text=Event+2" alt="Event Photography Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Event Photography</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="artistic">
+                    <img src="https://via.placeholder.com/400x300?text=Artistic+2" alt="Artistic Photography Sample" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>Artistic Photography</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+            <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+            <img id="lightboxImage" src="" alt="Lightbox Image">
+            <button class="lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+            <p id="lightboxCaption" class="lightbox-caption"></p>
+        </div>
+    </div>
 
     <!-- Videography Gallery -->
     <section id="videography" class="gallery-section">
@@ -118,15 +195,15 @@
             <p class="section-subtitle">Check out my work on YouTube and other platforms</p>
             <div class="video-grid">
                 <div class="video-item">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/Ro0mDsHIzSY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/Ro0mDsHIzSY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Video Sample 1</h3>
                 </div>
                 <div class="video-item">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/LRzUfpNciTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/LRzUfpNciTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Video Sample 2</h3>
                 </div>
                 <div class="video-item">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Video Sample 3</h3>
                 </div>
             </div>
