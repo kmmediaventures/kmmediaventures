@@ -70,6 +70,11 @@ body {
     text-shadow: 0 0 10px var(--accent-color);
 }
 
+.nav-link.active {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -85,6 +90,18 @@ body {
     margin: 5px 0;
     transition: 0.3s;
     border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* Hero Section */
@@ -410,6 +427,11 @@ section h2::after {
     box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
 }
 
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 .contact-info {
     text-align: center;
     color: var(--text-light);
@@ -454,6 +476,7 @@ section h2::after {
     color: var(--text-color);
     transition: all 0.3s ease;
     font-size: 1.5rem;
+    text-decoration: none;
 }
 
 .social-link:hover {
@@ -486,6 +509,20 @@ footer {
     padding: 20px;
     color: var(--text-light);
     border-top: 1px solid var(--border-color);
+}
+
+/* Image Loading */
+img.loaded {
+    animation: fadeInImage 0.5s ease;
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Responsive Design */
