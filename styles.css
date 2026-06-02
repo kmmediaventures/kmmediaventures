@@ -1,9 +1,38 @@
-/* =========================
+/* =========================================================
    NAVIGATION — DESKTOP
-   ========================= */
+   ========================================================= */
+.site-header {
+  width: 100%;
+  background: #0d0f14;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.nav-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.12em;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
 .desktop-nav {
   display: flex;
-  gap: 24px;
+  gap: 28px;
   align-items: center;
 }
 
@@ -13,94 +42,6 @@
   letter-spacing: 0.12em;
   color: #fff;
   text-decoration: none;
+  transition: 0.2s ease;
 }
 
-.desktop-nav .nav-link:hover,
-.desktop-nav .nav-link.active {
-  color: var(--accent);
-}
-
-/* =========================
-   HAMBURGER ICON
-   ========================= */
-#hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-
-#hamburger span {
-  width: 28px;
-  height: 3px;
-  background: #fff;
-  transition: 0.3s ease;
-}
-
-#hamburger.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-#hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-#hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* =========================
-   MOBILE NAV MENU
-   ========================= */
-.mobile-nav {
-  display: none;
-  flex-direction: column;
-  background: #11141b;
-  padding: 20px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.mobile-nav.active {
-  display: flex;
-}
-
-.mobile-nav .nav-link {
-  padding: 12px 0;
-  font-size: 0.9rem;
-  color: #fff;
-  text-decoration: none;
-}
-
-.mobile-nav .nav-link:hover {
-  color: var(--accent);
-}
-
-/* =========================
-   MOBILE SUBMENU
-   ========================= */
-.submenu {
-  margin-top: 10px;
-  padding-left: 15px;
-  display: flex;
-  flex-direction: column;
-}
-
-.submenu-title {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: 5px;
-}
-
-/* =========================
-   RESPONSIVE BEHAVIOR
-   ========================= */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  #hamburger {
-    display: flex;
-  }
-}
