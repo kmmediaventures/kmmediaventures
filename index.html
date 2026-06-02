@@ -49,57 +49,20 @@
         .section-subtitle { color: var(--muted); margin-top: 8px; font-size: 0.95rem; }
 
         /* NAVBAR */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(11, 12, 16, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+       <nav class="nav-links">
 
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-        }
+    <div class="dropdown">
+        <a class="menu-main">MEDIA</a>
 
-        .nav-logo {
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
+        <div class="dropdown-menu">
+            <a href="#photography">Photography</a>
+            <a href="#videography">Videography</a>
+        </div>
+    </div>
 
-        .nav-logo span { color: var(--accent); }
+    <a href="#contact" class="contact-link">Contact</a>
 
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            font-size: 0.9rem;
-        }
-
-        .nav-links a {
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 500;
-            font-size: 0.8rem;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.2s ease-out;
-        }
-
-        .nav-links a:hover::after { width: 100%; }
+</nav>
 
         /* HERO */
         #hero {
