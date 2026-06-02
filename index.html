@@ -1,32 +1,199 @@
-<header class="site-header">
-  <div class="container nav">
-    <a href="#hero" class="nav-logo">
-      <span>KM</span> MEDIA VENTURES
-    </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KM Media Ventures</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- MOBILE HAMBURGER -->
-    <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-    <!-- DESKTOP NAV -->
-    <nav class="desktop-nav">
-      <a href="#hero" class="nav-link">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#photography" class="nav-link">Photography</a>
-      <a href="#videography" class="nav-link">Videography</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </nav>
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
-    <!-- MOBILE NAV -->
-    <nav class="nav-menu mobile-nav" id="navMenu">
-      <a href="#hero" class="nav-link">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#photography" class="nav-link">Photography</a>
-      <a href="#videography" class="nav-link">Videography</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </nav>
-  </div>
-</header>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#hero" class="nav-logo">
+        <span>KM</span> MEDIA VENTURES
+      </a>
+
+      <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#hero" class="nav-link">Home</a>
+
+        <div class="dropdown">
+          <button class="menu-main nav-link" type="button">
+            Media <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#photography" class="nav-link">Photography</a>
+            <a href="#videography" class="nav-link">Videography</a>
+          </div>
+        </div>
+
+        <a href="#contact" class="nav-link contact-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+                                                                                                    <!-- HERO -->
+    <section id="hero" class="section hero">
+      <div class="container hero-inner">
+        <div class="hero-content fade-up">
+          <p class="hero-kicker upper tracking-wide text-muted">
+            Photography & Videography
+          </p>
+          <h1 class="hero-title">
+            Visual stories for <span>artists</span>, events, and brands.
+          </h1>
+          <p class="hero-text">
+            KM Media Ventures captures authentic moments with cinematic style—whether on stage, on set, or on location.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#photography" class="btn btn-primary">
+              View photography
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#videography" class="btn btn-outline">
+              Watch videos
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-media fade-up">
+          <div class="hero-media-inner">
+            <img src="images/hero.jpg" alt="KM Media Ventures hero image" />
+            <div class="hero-tag">
+              <i class="fa-solid fa-camera"></i>
+              Live performance • Portrait • Event
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+                                                                                       <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container about-inner">
+        <div class="about-text fade-up">
+          <h2>About KM Media Ventures</h2>
+          <p class="section-subtitle">
+            Story-driven visuals for artists, performers, and creatives.
+          </p>
+          <p>
+            <span class="about-highlight">KM Media Ventures</span> specializes in capturing the energy, emotion, and atmosphere of live performances, intimate portraits, and unforgettable events.
+          </p>
+          <p>
+            From small venues to large stages, every project is approached with a focus on storytelling, mood, and authenticity.
+          </p>
+
+          <ul class="about-list">
+            <li>Live performance photography & videography</li>
+            <li>Artist and band portraits</li>
+            <li>Event coverage and promotional content</li>
+          </ul>
+        </div>
+
+        <div class="about-photo fade-up">
+          <img src="images/about.jpg" alt="Behind the scenes with KM Media Ventures" />
+        </div>
+      </div>
+    </section>
+
+                                                                                           <!-- PHOTOGRAPHY -->
+    <section id="photography" class="section">
+      <div class="container">
+        <div class="gallery-header fade-up">
+          <h2>Photography Portfolio</h2>
+          <p class="section-subtitle">Browse by category</p>
+        </div>
+
+        <div class="filter-buttons fade-up">
+          <button class="filter-btn active upper tracking-wide" data-filter="all">
+            All
+          </button>
+          <button class="filter-btn upper tracking-wide" data-filter="portrait">
+            Portraits
+          </button>
+          <button class="filter-btn upper tracking-wide" data-filter="live">
+            Live Performance
+          </button>
+          <button class="filter-btn upper tracking-wide" data-filter="event">
+            Events
+          </button>
+        </div>
+
+        <div class="gallery-grid fade-up">
+                                                                                           <!-- ALL -->
+          <article class="gallery-item" data-category="all">
+            <img src="images/all1.jpg" alt="All category photo 1" />
+            <div class="gallery-overlay">
+              <p>All</p>
+            </div>
+            <div class="photo-label upper tracking-wide">All</div>
+          </article>
+
+          <article class="gallery-item" data-category="all">
+            <img src="images/all2.jpg" alt="All category photo 2" />
+            <div class="gallery-overlay">
+              <p>All</p>
+            </div>
+            <div class="photo-label upper tracking-wide">All</div>
+          </article>
+
+                                                                                        <!-- PORTRAITS -->
+          <article class="gallery-item" data-category="portrait">
+            <img src="images/Lukas_Patrick1.jpeg" alt="Portrait 1" />
+            <div class="gallery-overlay">
+              <p>Portrait</p>
+            </div>
+            <div class="photo-label upper tracking-wide">Portrait</div>
+          </article>
+
+          <article class="gallery-item" data-category="portrait">
+            <img src="images/Songwriter1.jpeg" alt="Portrait 2" />
+            <div class="gallery-overlay">
+              <p>Portrait</p>
+            </div>
+            <div class="photo-label upper tracking-wide">Portrait</div>
+          </article>
+
+        <article class="gallery-item" data-category="portrait">
+            <img src="images/Jay_Beckenstein1.jpeg" alt="Portrait 1" />
+            <div class="gallery-overlay">
+              <p>Portrait</p>
+            </div>
+            <div class="photo-label upper tracking-wide">Portrait</div>
+          </article>
+
+                                                                                  <!-- LIVE PERFORMANCE -->
+          <article class="gallery-item" data-category="live">
+            <img src="images/Aaron_Blake1.jpeg" alt="Live performance 1" />
+            <div class="gallery-overlay">
+              <p>Live Performance</p>
+            </div>
+            <div class="photo-label upper tracking-wide">Live Performance</div>
+          </article>
+
+          <article class="gallery-item" data-category="live">
+            <img src="images/Edgar_Meyer1.jpeg" alt="Live performance 2" />
+            <div class="gallery-overlay">
+              <p>Live Performance</p>
+            </div>
+            <div class="photo-label upper tracking-wide">Live Performance</div>
+          </article>
