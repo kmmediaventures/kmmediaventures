@@ -1,309 +1,5 @@
 /* =========================================================
-   ROOT + GLOBAL RESET
-   ========================================================= */
-:root {
-    --bg-dark: #0b0c10;
-    --bg-light: #f5f5f5;
-    --accent: #e63946;
-    --accent-soft: #f1a1aa;
-    --text-main: #ffffff;
-    --text-dark: #222222;
-    --muted: #999999;
-    --max-width: 1100px;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-main);
-    line-height: 1.6;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-.container {
-    width: 90%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-section {
-    padding: 80px 0;
-    scroll-margin-top: 80px;
-}
-
-h1, h2, h3 {
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
-.section-subtitle {
-    color: var(--muted);
-    margin-top: 8px;
-    font-size: 0.95rem;
-}
-
-/* =========================================================
-   FIXED NAVIGATION
-   ========================================================= */
-.site-header {
-    width: 100%;
-    background: #0d0f14;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-}
-
-.nav-logo {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.12em;
-}
-
-.nav-logo span {
-    color: var(--accent);
-}
-
-/* DESKTOP NAV */
-.desktop-nav {
-    display: flex;
-    gap: 28px;
-    align-items: center;
-}
-
-.desktop-nav .nav-link {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #fff;
-    transition: 0.2s ease;
-}
-
-.desktop-nav .nav-link:hover {
-    color: var(--accent);
-}
-
-/* MOBILE CONTACT BUTTON */
-.mobile-contact-btn {
-    display: none;
-    background: var(--accent);
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-}
-
-/* Show only on mobile */
-@media (max-width: 768px) {
-    .mobile-contact-btn {
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .desktop-nav {
-        display: none;
-    }
-}
-
-/* =========================================================
-   MOBILE HOME ICON (GLOWING)
-   ========================================================= */
-.mobile-home-icon {
-    position: fixed;
-    bottom: 18px;
-    right: 18px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    padding: 14px;
-    border-radius: 50%;
-    z-index: 9999;
-    color: #fff;
-    font-size: 1.3rem;
-    transition: 0.3s ease;
-    box-shadow: 0 0 12px rgba(255,255,255,0.35);
-    animation: homeGlow 2.2s ease-in-out infinite alternate;
-}
-
-@keyframes homeGlow {
-    from {
-        box-shadow: 0 0 8px rgba(255,255,255,0.25);
-        transform: scale(1);
-    }
-    to {
-        box-shadow: 0 0 18px rgba(255,255,255,0.55);
-        transform: scale(1.08);
-    }
-}
-
-@media (min-width: 769px) {
-    .mobile-home-icon {
-        display: none;
-    }
-}
-
-/* Prevent hero from hiding under fixed header */
-main {
-    padding-top: 80px;
-}
-
-/* =========================================================
-   HERO — IMAGE REMOVED
-   ========================================================= */
-#hero {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    background: radial-gradient(circle at top left, #1f2833 0, #0b0c10 55%);
-    padding-top: 20px;
-}
-
-.hero-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.hero-kicker {
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.75rem;
-    color: var(--accent-soft);
-}
-
-.hero-title {
-    font-size: clamp(2.4rem, 4vw, 3.2rem);
-    line-height: 1.1;
-    margin-bottom: 10px;
-}
-
-.hero-title span {
-    color: var(--accent);
-}
-
-.hero-text {
-    color: #d1d1d1;
-    max-width: 480px;
-    margin-bottom: 20px;
-}
-
-/* MOBILE HERO FIXES */
-@media (max-width: 768px) {
-    #hero {
-        min-height: 50vh;
-        padding-top: 40px;
-        text-align: center;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-        line-height: 1.2;
-        text-align: center;
-    }
-
-    .hero-text {
-        margin: 0 auto 20px auto;
-        text-align: center;
-        max-width: 90%;
-    }
-
-    .hero-cta {
-        justify-content: center;
-    }
-}
-
-.hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-}
-
-.btn-primary,
-.btn-outline {
-    padding: 10px 20px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    border: 1px solid transparent;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-}
-
-.btn-outline {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.4);
-    color: #f5f5f5;
-}
-
-/* =========================================================
-   ABOUT
-   ========================================================= */
-#about {
-    background: #11141b;
-}
-
-.about-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: 40px;
-    align-items: center;
-}
-
-.about-text p {
-    margin-bottom: 12px;
-    color: #d0d0d0;
-    font-size: 0.95rem;
-}
-
-.about-list {
-    margin-top: 10px;
-    list-style: none;
-    display: grid;
-    gap: 6px;
-    font-size: 0.9rem;
-}
-
-.about-list li::before {
-    content: "• ";
-    color: var(--accent);
-}
-
-/* =========================================================
-   PHOTOGRAPHY
+   PHOTOGRAPHY — MASONRY LAYOUT (OPTION 3)
    ========================================================= */
 #photography {
     background: var(--bg-dark);
@@ -340,25 +36,36 @@ main {
     border-color: var(--accent);
 }
 
+/* ⭐ MASONRY GRID */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
+    column-count: 2;
+    column-gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        column-count: 1;
+    }
 }
 
 .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
     background: #151820;
 }
 
+/* ⭐ Images keep natural height — no cropping */
 .gallery-item img {
     width: 100%;
-    height: 260px;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    border-radius: 12px;
 }
 
+/* Label stays the same */
 .photo-label {
     position: absolute;
     left: 10px;
@@ -368,67 +75,4 @@ main {
     border-radius: 999px;
     font-size: 0.7rem;
     text-transform: uppercase;
-}
-
-/* =========================================================
-   VIDEOGRAPHY
-   ========================================================= */
-#videography {
-    background: #11141b;
-}
-
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
-}
-
-.video-item {
-    background: #151820;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.video-item iframe {
-    width: 100%;
-    height: 220px;
-    border-radius: 8px;
-    border: none;
-}
-
-/* =========================================================
-   CONTACT
-   ========================================================= */
-#contact {
-    background: #0b0c10;
-}
-
-.contact-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    gap: 40px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 14px;
-    border-radius: 6px;
-    border: none;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-footer {
-    padding: 30px 0;
-    background: #0b0c10;
-    text-align: center;
-}
-
-.footer-social a {
-    margin: 0 8px;
-    font-size: 1.2rem;
 }
