@@ -301,3 +301,181 @@ main {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.filter-buttons button.active,
+.filter-buttons button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Masonry grid */
+.gallery-grid {
+    column-count: 2;
+    column-gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        column-count: 1;
+    }
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #151820;
+    display: inline-block;
+    width: 100%;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.photo-label {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox-inner {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.lightbox button {
+    position: absolute;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: #fff;
+    padding: 10px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.lightbox-close {
+    top: -50px;
+    right: 0;
+}
+
+.lightbox-prev {
+    top: 50%;
+    left: -50px;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    top: 50%;
+    right: -50px;
+    transform: translateY(-50%);
+}
+
+.lightbox-caption {
+    text-align: center;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* =========================================================
+   VIDEOGRAPHY
+   ========================================================= */
+#videography {
+    background: #11141b;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.video-item {
+    background: #151820;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.video-item iframe {
+    width: 100%;
+    height: 220px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+#contact {
+    background: #0b0c10;
+}
+
+.contact-inner {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 40px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+    border: none;
+    background: #151820;
+    color: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid var(--accent);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+    padding: 30px 0;
+    background: #0b0c10;
+    text-align: center;
+}
+
+.footer-social a {
+    margin: 0 8px;
+    font-size: 1.2rem;
+}
