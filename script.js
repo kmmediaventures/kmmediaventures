@@ -1,7 +1,7 @@
 // Set footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// FILTER LOGIC
+// FILTER LOGIC — MASONRY SAFE
 const buttons = document.querySelectorAll(".filter-buttons button");
 const items = document.querySelectorAll(".gallery-item");
 
@@ -16,7 +16,7 @@ buttons.forEach(btn => {
             const category = item.getAttribute("data-category");
 
             if (filter === "all" || category === filter) {
-                item.style.display = "block";
+                item.style.display = "inline-block"; // ⭐ REQUIRED
             } else {
                 item.style.display = "none";
             }
