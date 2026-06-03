@@ -178,25 +178,13 @@
             <h3>Video Sample 1</h3>
           </article>
 
-          <div class="video-grid">
-          <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/UWO4KHAyirQ" allowfullscreen></iframe>
-            <h3>Video Sample 1</h3>
-          </article>
-
-           <div class="video-grid">
-          <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/Hgs7QpuwBT8?" allowfullscreen></iframe>
-            <h3>Video Sample 1</h3>
-          </article>
-
           <article class="video-item">
             <iframe src="https://www.youtube.com/embed/LRzUfpNciTo" allowfullscreen></iframe>
             <h3>Video Sample 2</h3>
           </article>
 
           <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/qjINlR8E_dk" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
             <h3>Video Sample 3</h3>
           </article>
 
@@ -223,15 +211,37 @@
           <p>Whether you’re planning a performance, launching a new project, or need fresh visuals, I’d love to talk.</p>
         </div>
 
-        <form class="contact-form" id="contactForm" novalidate>
+        <!-- ⭐ FORMSPREE INTEGRATION -->
+        <form 
+          action="https://formspree.io/f/xpqeannr" 
+          method="POST" 
+          class="contact-form"
+        >
           <label for="name">Name</label>
-          <input id="name" type="text" placeholder="Your name" required />
+          <input 
+            id="name" 
+            name="name" 
+            type="text" 
+            placeholder="Your name" 
+            required 
+          />
 
           <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@example.com" required />
+          <input 
+            id="email" 
+            name="email" 
+            type="email" 
+            placeholder="you@example.com" 
+            required 
+          />
 
           <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+          <textarea 
+            id="message" 
+            name="message" 
+            placeholder="Tell me about your project..." 
+            required
+          ></textarea>
 
           <button type="submit" class="btn btn-primary">Send message</button>
         </form>
