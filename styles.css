@@ -1,5 +1,5 @@
 /* =========================================================
-   PHOTOGRAPHY — MASONRY LAYOUT (OPTION 3)
+   PHOTOGRAPHY — MASONRY LAYOUT (FINAL WORKING VERSION)
    ========================================================= */
 #photography {
     background: var(--bg-dark);
@@ -55,9 +55,10 @@
     border-radius: 12px;
     overflow: hidden;
     background: #151820;
+    display: inline-block; /* ⭐ REQUIRED FOR MASONRY */
+    width: 100%;
 }
 
-/* ⭐ Images keep natural height — no cropping */
 .gallery-item img {
     width: 100%;
     height: auto;
@@ -65,7 +66,6 @@
     border-radius: 12px;
 }
 
-/* Label stays the same */
 .photo-label {
     position: absolute;
     left: 10px;
