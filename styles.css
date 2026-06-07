@@ -54,7 +54,7 @@ section {
 /* Correct mobile scroll offset */
 @media (max-width: 768px) {
     section {
-        scroll-margin-top: 150px;
+        scroll-margin-top: 120px;
     }
 }
 
