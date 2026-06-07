@@ -28,11 +28,7 @@ document.querySelectorAll(".nav-link").forEach(link => {
 const homeButton = document.getElementById("homeButton");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 250) {
-        homeButton.style.display = "block";
-    } else {
-        homeButton.style.display = "none";
-    }
+    homeButton.style.display = window.scrollY > 250 ? "block" : "none";
 });
 
 // Smooth scroll to top
@@ -46,6 +42,7 @@ homeButton.addEventListener("click", () => {
 // =========================================================
 const buttons = document.querySelectorAll(".filter-buttons button");
 const items = document.querySelectorAll(".gallery-item");
+const galleryGrid = document.querySelector(".gallery-grid");
 
 buttons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -56,13 +53,15 @@ buttons.forEach(btn => {
 
         items.forEach(item => {
             const category = item.getAttribute("data-category");
-
-            if (filter === "all" || category === filter) {
-                item.style.display = "inline-block";
-            } else {
-                item.style.display = "none";
-            }
+            item.style.display = (filter === "all" || category === filter)
+                ? "inline-block"
+                : "none";
         });
+
+        // Force masonry reflow (prevents gaps)
+        galleryGrid.style.display = "none";
+        galleryGrid.offsetHeight; // trigger reflow
+        galleryGrid.style.display = "";
     });
 });
 
@@ -78,7 +77,13 @@ const nextBtn = document.getElementById("lightboxNext");
 const prevBtn = document.getElementById("lightboxPrev");
 
 let currentIndex = 0;
-let galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+let galleryImages = [];
+
+// Refresh image list (future‑proof)
+function updateGalleryImages() {
+    galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+}
+updateGalleryImages();
 
 // Open lightbox
 galleryImages.forEach((img, index) => {
