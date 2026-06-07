@@ -45,15 +45,16 @@ img {
     margin: 0 auto;
 }
 
+/* Default scroll offset for desktop */
 section {
     padding: 80px 0;
-    scroll-margin-top: 150px;
+    scroll-margin-top: 80px;
 }
 
-/* Mobile scroll offset fix */
+/* Correct mobile scroll offset */
 @media (max-width: 768px) {
     section {
-        scroll-margin-top: 120px;
+        scroll-margin-top: 150px;
     }
 }
 
