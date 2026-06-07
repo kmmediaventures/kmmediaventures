@@ -23,12 +23,16 @@ document.querySelectorAll(".nav-link").forEach(link => {
 
 
 // =========================================================
-// FLOATING HOME BUTTON (SHOW ON SCROLL)
+// FLOATING HOME BUTTON (FADE-IN VERSION)
 // =========================================================
 const homeButton = document.getElementById("homeButton");
 
 window.addEventListener("scroll", () => {
-    homeButton.style.display = window.scrollY > 250 ? "block" : "none";
+    if (window.scrollY > 250) {
+        homeButton.classList.add("visible");
+    } else {
+        homeButton.classList.remove("visible");
+    }
 });
 
 // Smooth scroll to top
