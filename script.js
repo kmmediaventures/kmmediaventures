@@ -1,11 +1,5 @@
-// =========================================================
-// DOM READY
-// =========================================================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // -------------------------------
-  // ELEMENT REFERENCES
-  // -------------------------------
   const navMenu = document.getElementById("navMenu");
   const hamburger = document.getElementById("hamburger");
   const homeButton = document.getElementById("homeButton");
@@ -26,17 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
 
-  // =========================================================
-  // FOOTER YEAR
-  // =========================================================
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
+  // YEAR
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
 
-  // =========================================================
   // MOBILE NAV
-  // =========================================================
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("open");
   });
@@ -46,9 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // =========================================================
-  // FLOATING HOME BUTTON
-  // =========================================================
+  // HOME BUTTON
   window.addEventListener("scroll", () => {
     homeButton.classList.toggle("visible", window.scrollY > 400);
   });
@@ -58,9 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // =========================================================
-  // FADE-UP ANIMATIONS
-  // =========================================================
+  // FADE-UP
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -77,20 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =========================================================
-  // MASONRY REFLOW HACK
-  // =========================================================
+  // MASONRY REFLOW
   function masonryReflow() {
     const grid = document.querySelector(".gallery-grid");
     grid.style.display = "none";
-    void grid.offsetHeight; // force reflow
+    void grid.offsetHeight;
     grid.style.display = "";
   }
 
 
-  // =========================================================
   // GET VISIBLE ITEMS
-  // =========================================================
   function getVisibleItems() {
     return Array.from(galleryItems).filter(
       item => item.style.display !== "none"
@@ -98,18 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =========================================================
-  // FILTERING (Portrait + Live only)
-  // =========================================================
+  // FILTERING
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
 
-      // Update active button
       filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Show/hide items
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
 
@@ -129,9 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // =========================================================
-  // LIGHTBOX — Visible Items Only
-  // =========================================================
+  // LIGHTBOX
   galleryItems.forEach(item => {
     const img = item.querySelector("img");
 
@@ -185,8 +159,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================================
-  // DEFAULT FILTER ON LOAD (Portraits)
+  // CRITICAL FIX: RESET ALL ITEMS BEFORE DEFAULT FILTER
   // =========================================================
+  galleryItems.forEach(item => {
+    item.style.display = "inline-block";
+    item.style.opacity = "1";
+    item.style.pointerEvents = "auto";
+  });
+
+  masonryReflow();
+
+  // Apply default Portrait filter
   document.querySelector('.filter-btn[data-filter="portrait"]').click();
 
 });
