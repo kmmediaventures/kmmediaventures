@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navMenu.classList.toggle("open");
     });
 
-    // Close menu when clicking a link
     navMenu.querySelectorAll(".nav-link").forEach(link => {
       link.addEventListener("click", () => {
         navMenu.classList.remove("open");
@@ -88,32 +87,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ===============================
-  // GALLERY FILTERING (FIXED)
+  // ENABLE FILTERING *AFTER* IMAGES LOAD
   // ===============================
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
+  window.addEventListener("load", () => {
+    enableFiltering();
+  });
 
-      // Update active button
-      filterButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+  function enableFiltering() {
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
 
-      // Show/hide items
-      galleryItems.forEach(item => {
-        const category = item.getAttribute("data-category");
+        // Active button styling
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-        if (filter === "all" || category === filter) {
-          item.style.display = "inline-block";   // CRITICAL FIX
-          item.style.opacity = "1";
-          item.style.pointerEvents = "auto";
-        } else {
-          item.style.display = "none";
-          item.style.opacity = "0";
-          item.style.pointerEvents = "none";
-        }
+        // Show/hide items
+        galleryItems.forEach(item => {
+          const category = item.getAttribute("data-category");
+
+          if (filter === "all" || category === filter) {
+            item.style.display = "inline-block";   // CRITICAL for masonry
+            item.style.opacity = "1";
+            item.style.pointerEvents = "auto";
+          } else {
+            item.style.display = "none";
+            item.style.opacity = "0";
+            item.style.pointerEvents = "none";
+          }
+        });
       });
     });
-  });
+  }
 
 
   // ===============================
