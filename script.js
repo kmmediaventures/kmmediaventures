@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // -------------------------------
+  // ELEMENT REFERENCES
+  // -------------------------------
   const navMenu = document.getElementById("navMenu");
   const hamburger = document.getElementById("hamburger");
   const homeButton = document.getElementById("homeButton");
@@ -20,11 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
 
-  // YEAR
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  // =========================================================
+  // FOOTER YEAR
+  // =========================================================
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 
 
+  // =========================================================
   // MOBILE NAV
+  // =========================================================
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("open");
   });
@@ -34,7 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // HOME BUTTON
+  // =========================================================
+  // FLOATING HOME BUTTON
+  // =========================================================
   window.addEventListener("scroll", () => {
     homeButton.classList.toggle("visible", window.scrollY > 400);
   });
@@ -44,7 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // FADE-UP
+  // =========================================================
+  // FADE-UP ANIMATIONS
+  // =========================================================
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -61,16 +74,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  // =========================================================
   // MASONRY REFLOW
+  // =========================================================
   function masonryReflow() {
     const grid = document.querySelector(".gallery-grid");
     grid.style.display = "none";
-    void grid.offsetHeight;
+    void grid.offsetHeight; // force browser repaint
     grid.style.display = "";
   }
 
 
+  // =========================================================
   // GET VISIBLE ITEMS
+  // =========================================================
   function getVisibleItems() {
     return Array.from(galleryItems).filter(
       item => item.style.display !== "none"
@@ -78,14 +95,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  // =========================================================
   // FILTERING
+  // =========================================================
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
 
+      // Update active button
       filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
+      // Show/hide items
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
 
@@ -105,7 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // LIGHTBOX
+  // =========================================================
+  // LIGHTBOX — Visible Items Only
+  // =========================================================
   galleryItems.forEach(item => {
     const img = item.querySelector("img");
 
@@ -158,15 +181,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // DEFAULT FILTER ON LOAD
+  // =========================================================
+  // DEFAULT FILTER ON LOAD (Portraits)
+  // =========================================================
+
+  // Reset all items to visible before filtering
   galleryItems.forEach(item => {
     item.style.display = "inline-block";
     item.style.opacity = "1";
     item.style.pointerEvents = "auto";
   });
 
-  document.querySelector('.filter-btn[data-filter="portrait"]').click();
+  // Trigger Portrait filter
+  const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
+  defaultBtn.click();
 
+  // Force masonry repaint AFTER filter applies
   setTimeout(masonryReflow, 50);
 
 });
