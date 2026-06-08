@@ -134,6 +134,7 @@ h1, h2, h3 {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.35s ease;
+        z-index: 998;
     }
 
     .nav-menu.open {
@@ -153,7 +154,7 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   FLOATING HOME BUTTON
+   FLOATING HOME BUTTON — FIXED
    ========================================================= */
 .floating-home {
     position: fixed;
@@ -182,13 +183,17 @@ h1, h2, h3 {
     z-index: 50;
 }
 
+.floating-home::before {
+    content: none !important;
+}
+
 .floating-home.visible {
     opacity: 1;
     pointer-events: auto;
 }
 
 /* =========================================================
-   HERO SECTION — FIXED
+   HERO SECTION
    ========================================================= */
 main {
     padding-top: 80px;
