@@ -1,5 +1,11 @@
+// =========================================================
+// DOM READY
+// =========================================================
 document.addEventListener("DOMContentLoaded", () => {
 
+  // -------------------------------
+  // ELEMENT REFERENCES
+  // -------------------------------
   const navMenu = document.getElementById("navMenu");
   const hamburger = document.getElementById("hamburger");
   const homeButton = document.getElementById("homeButton");
@@ -20,17 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
 
-  // ===============================
+  // =========================================================
   // FOOTER YEAR
-  // ===============================
+  // =========================================================
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
 
 
-  // ===============================
+  // =========================================================
   // MOBILE NAV
-  // ===============================
+  // =========================================================
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("open");
   });
@@ -40,9 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // ===============================
-  // HOME BUTTON
-  // ===============================
+  // =========================================================
+  // FLOATING HOME BUTTON
+  // =========================================================
   window.addEventListener("scroll", () => {
     homeButton.classList.toggle("visible", window.scrollY > 400);
   });
@@ -52,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // ===============================
+  // =========================================================
   // FADE-UP ANIMATIONS
-  // ===============================
+  // =========================================================
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -71,29 +77,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // ===============================
-  // FILTERING (Portrait + Live only)
-  // ===============================
+  // =========================================================
+  // MASONRY REFLOW HACK
+  // =========================================================
   function masonryReflow() {
     const grid = document.querySelector(".gallery-grid");
     grid.style.display = "none";
-    void grid.offsetHeight;
+    void grid.offsetHeight; // force reflow
     grid.style.display = "";
   }
 
+
+  // =========================================================
+  // GET VISIBLE ITEMS
+  // =========================================================
   function getVisibleItems() {
     return Array.from(galleryItems).filter(
       item => item.style.display !== "none"
     );
   }
 
+
+  // =========================================================
+  // FILTERING (Portrait + Live only)
+  // =========================================================
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
 
+      // Update active button
       filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
+      // Show/hide items
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
 
@@ -113,10 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // ===============================
-  // LIGHTBOX (Visible items only)
-  // ===============================
-  galleryItems.forEach((item) => {
+  // =========================================================
+  // LIGHTBOX — Visible Items Only
+  // =========================================================
+  galleryItems.forEach(item => {
     const img = item.querySelector("img");
 
     img.addEventListener("click", () => {
@@ -166,5 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") closeLightbox();
   });
+
+
+  // =========================================================
+  // DEFAULT FILTER ON LOAD (Portraits)
+  // =========================================================
+  document.querySelector('.filter-btn[data-filter="portrait"]').click();
 
 });
