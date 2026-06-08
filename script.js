@@ -1,142 +1,150 @@
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
+// DOM READY
+document.addEventListener('DOMContentLoaded', () => {
+  const navMenu = document.getElementById('navMenu');
+  const hamburger = document.getElementById('hamburger');
+  const homeButton = document.getElementById('homeButton');
+  const yearSpan = document.getElementById('year');
 
-hamburger.addEventListener("click", () => {
-  navMenu.classList.toggle("open");
-});
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
 
-/* Close menu when clicking a link (mobile) */
-document.querySelectorAll(".nav-link").forEach(link => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("open");
-  });
-});
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
 
-/* =========================================================
-   FLOATING HOME BUTTON
-   ========================================================= */
-const homeButton = document.getElementById("homeButton");
+  const fadeUps = document.querySelectorAll('.fade-up');
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 400) {
-    homeButton.classList.add("visible");
-  } else {
-    homeButton.classList.remove("visible");
+  let currentIndex = 0;
+  const galleryArray = Array.from(galleryItems);
+
+  // Set year in footer
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
   }
-});
 
-homeButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-/* =========================================================
-   FADE-UP ANIMATION
-   ========================================================= */
-const fadeElements = document.querySelectorAll(".fade-up");
-
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
+  // MOBILE NAV TOGGLE
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
     });
-  },
-  { threshold: 0.2 }
-);
 
-fadeElements.forEach(el => observer.observe(el));
+    // Close nav when clicking a link
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+      });
+    });
+  }
 
-/* =========================================================
-   GALLERY FILTERING
-   ========================================================= */
-const filterButtons = document.querySelectorAll(".filter-btn");
-const galleryItems = document.querySelectorAll(".gallery-item");
+  // FLOATING HOME BUTTON
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      homeButton.classList.add('visible');
+    } else {
+      homeButton.classList.remove('visible');
+    }
+  });
 
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter;
+  homeButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-    filterButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
+  // FADE-UP ANIMATION
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
 
-    galleryItems.forEach(item => {
-      const category = item.dataset.category;
+    fadeUps.forEach(el => observer.observe(el));
+  } else {
+    // Fallback: just show them
+    fadeUps.forEach(el => el.classList.add('visible'));
+  }
 
-      if (filter === "all" || category === filter) {
-        item.style.display = "inline-block";
-        item.style.opacity = "1";
-      } else {
-        item.style.display = "none";
-        item.style.opacity = "0";
-      }
+  // GALLERY FILTERING
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Active state on buttons
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide items
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+
+        if (filter === 'all' || category === filter) {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.display = 'inline-block';
+        } else {
+          item.style.opacity = '0';
+          item.style.pointerEvents = 'none';
+          item.style.display = 'none';
+        }
+      });
     });
   });
+
+  // LIGHTBOX OPEN
+  galleryItems.forEach((item, index) => {
+    const img = item.querySelector('img');
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      openLightbox();
+    });
+  });
+
+  function openLightbox() {
+    const item = galleryArray[currentIndex];
+    const img = item.querySelector('img');
+    const label = item.querySelector('.photo-label');
+
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt || '';
+    lightboxCaption.textContent = label ? label.textContent : '';
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryArray.length) % galleryArray.length;
+    openLightbox();
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryArray.length;
+    openLightbox();
+  }
+
+  // LIGHTBOX CONTROLS
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+
+  // Close on backdrop click
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+      closeLightbox();
+    }
+  });
 });
-
-/* =========================================================
-   LIGHTBOX
-   ========================================================= */
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-const lightboxCaption = document.getElementById("lightboxCaption");
-const lightboxClose = document.getElementById("lightboxClose");
-const lightboxPrev = document.getElementById("lightboxPrev");
-const lightboxNext = document.getElementById("lightboxNext");
-
-let currentIndex = 0;
-let images = Array.from(galleryItems).map(item => ({
-  src: item.querySelector("img").src,
-  caption: item.querySelector(".photo-label").innerText
-}));
-
-function openLightbox(index) {
-  currentIndex = index;
-  lightboxImage.src = images[index].src;
-  lightboxCaption.textContent = images[index].caption;
-  lightbox.classList.add("open");
-}
-
-function closeLightbox() {
-  lightbox.classList.remove("open");
-}
-
-function showPrev() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  openLightbox(currentIndex);
-}
-
-function showNext() {
-  currentIndex = (currentIndex + 1) % images.length;
-  openLightbox(currentIndex);
-}
-
-galleryItems.forEach((item, index) => {
-  item.addEventListener("click", () => openLightbox(index));
-});
-
-lightboxClose.addEventListener("click", closeLightbox);
-lightboxPrev.addEventListener("click", showPrev);
-lightboxNext.addEventListener("click", showNext);
-
-/* Close when clicking outside image */
-lightbox.addEventListener("click", e => {
-  if (e.target === lightbox) closeLightbox();
-});
-
-/* Keyboard controls */
-document.addEventListener("keydown", e => {
-  if (!lightbox.classList.contains("open")) return;
-
-  if (e.key === "Escape") closeLightbox();
-  if (e.key === "ArrowLeft") showPrev();
-  if (e.key === "ArrowRight") showNext();
-});
-
-/* =========================================================
-   FOOTER YEAR
-   ========================================================= */
-document.getElementById("year").textContent = new Date().getFullYear();
