@@ -153,7 +153,7 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   FLOATING HOME BUTTON — FIXED VERSION
+   FLOATING HOME BUTTON
    ========================================================= */
 .floating-home {
     position: fixed;
@@ -179,7 +179,7 @@ h1, h2, h3 {
     pointer-events: none;
     transition: opacity 0.3s ease;
 
-    z-index: 50; /* FIXED */
+    z-index: 50;
 }
 
 .floating-home.visible {
@@ -188,7 +188,7 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   HERO SECTION
+   HERO SECTION — FIXED
    ========================================================= */
 main {
     padding-top: 80px;
