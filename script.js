@@ -1,24 +1,19 @@
 /* =========================================================
-   FOOTER YEAR
-   ========================================================= */
-document.getElementById("year").textContent = new Date().getFullYear();
-
-
-/* =========================================================
-   MOBILE NAV TOGGLE
+   MOBILE NAV
    ========================================================= */
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("navMenu");
 
 hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
+  navMenu.classList.toggle("open");
 });
 
-// Close mobile menu when clicking a link
+/* Close menu when clicking a link (mobile) */
 document.querySelectorAll(".nav-link").forEach(link => {
-    link.addEventListener("click", () => navMenu.classList.remove("open"));
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("open");
+  });
 });
-
 
 /* =========================================================
    FLOATING HOME BUTTON
@@ -26,113 +21,122 @@ document.querySelectorAll(".nav-link").forEach(link => {
 const homeButton = document.getElementById("homeButton");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 250) {
-        homeButton.classList.add("visible");
-    } else {
-        homeButton.classList.remove("visible");
-    }
+  if (window.scrollY > 400) {
+    homeButton.classList.add("visible");
+  } else {
+    homeButton.classList.remove("visible");
+  }
 });
 
 homeButton.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+/* =========================================================
+   FADE-UP ANIMATION
+   ========================================================= */
+const fadeElements = document.querySelectorAll(".fade-up");
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+fadeElements.forEach(el => observer.observe(el));
 
 /* =========================================================
-   GALLERY FILTER (MASONRY SAFE)
+   GALLERY FILTERING
    ========================================================= */
-const filterButtons = document.querySelectorAll(".filter-buttons button");
+const filterButtons = document.querySelectorAll(".filter-btn");
 const galleryItems = document.querySelectorAll(".gallery-item");
-const galleryGrid = document.querySelector(".gallery-grid");
 
 filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        // Update active button
-        filterButtons.forEach(b => b.classList.remove("active"));
-        button.classList.add("active");
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
 
-        const filter = button.dataset.filter;
+    filterButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
 
-        // Show/hide items
-        galleryItems.forEach(item => {
-            const category = item.dataset.category;
-            item.style.display = (filter === "all" || category === filter)
-                ? "inline-block"
-                : "none";
-        });
+    galleryItems.forEach(item => {
+      const category = item.dataset.category;
 
-        // Force masonry reflow
-        galleryGrid.style.display = "none";
-        galleryGrid.offsetHeight; // trigger reflow
-        galleryGrid.style.display = "";
+      if (filter === "all" || category === filter) {
+        item.style.display = "inline-block";
+        item.style.opacity = "1";
+      } else {
+        item.style.display = "none";
+        item.style.opacity = "0";
+      }
     });
+  });
 });
 
-
 /* =========================================================
-   LIGHTBOX FUNCTIONALITY
+   LIGHTBOX
    ========================================================= */
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxCaption = document.getElementById("lightboxCaption");
-const closeBtn = document.getElementById("lightboxClose");
-const nextBtn = document.getElementById("lightboxNext");
-const prevBtn = document.getElementById("lightboxPrev");
+const lightboxClose = document.getElementById("lightboxClose");
+const lightboxPrev = document.getElementById("lightboxPrev");
+const lightboxNext = document.getElementById("lightboxNext");
 
 let currentIndex = 0;
-let galleryImages = [];
+let images = Array.from(galleryItems).map(item => ({
+  src: item.querySelector("img").src,
+  caption: item.querySelector(".photo-label").innerText
+}));
 
-// Collect all gallery images
-function updateGalleryImages() {
-    galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+function openLightbox(index) {
+  currentIndex = index;
+  lightboxImage.src = images[index].src;
+  lightboxCaption.textContent = images[index].caption;
+  lightbox.classList.add("open");
 }
-updateGalleryImages();
 
-// Open lightbox
-galleryImages.forEach((img, index) => {
-    img.addEventListener("click", () => {
-        currentIndex = index;
-        showLightboxImage();
-        lightbox.classList.add("open");
-    });
-});
-
-// Close lightbox
-closeBtn.addEventListener("click", () => {
-    lightbox.classList.remove("open");
-});
-
-// Navigate next
-nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    showLightboxImage();
-});
-
-// Navigate previous
-prevBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    showLightboxImage();
-});
-
-// Close when clicking background
-lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-        lightbox.classList.remove("open");
-    }
-});
-
-// Keyboard navigation
-document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("open")) return;
-
-    if (e.key === "ArrowRight") nextBtn.click();
-    if (e.key === "ArrowLeft") prevBtn.click();
-    if (e.key === "Escape") closeBtn.click();
-});
-
-// Update displayed image
-function showLightboxImage() {
-    const img = galleryImages[currentIndex];
-    lightboxImage.src = img.src;
-    lightboxCaption.textContent = img.alt;
+function closeLightbox() {
+  lightbox.classList.remove("open");
 }
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  openLightbox(currentIndex);
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % images.length;
+  openLightbox(currentIndex);
+}
+
+galleryItems.forEach((item, index) => {
+  item.addEventListener("click", () => openLightbox(index));
+});
+
+lightboxClose.addEventListener("click", closeLightbox);
+lightboxPrev.addEventListener("click", showPrev);
+lightboxNext.addEventListener("click", showNext);
+
+/* Close when clicking outside image */
+lightbox.addEventListener("click", e => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+/* Keyboard controls */
+document.addEventListener("keydown", e => {
+  if (!lightbox.classList.contains("open")) return;
+
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") showPrev();
+  if (e.key === "ArrowRight") showNext();
+});
+
+/* =========================================================
+   FOOTER YEAR
+   ========================================================= */
+document.getElementById("year").textContent = new Date().getFullYear();
