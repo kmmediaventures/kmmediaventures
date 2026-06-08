@@ -158,18 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // =========================================================
-  // CRITICAL FIX: RESET ALL ITEMS BEFORE DEFAULT FILTER
-  // =========================================================
+  // DEFAULT FILTER ON LOAD
   galleryItems.forEach(item => {
     item.style.display = "inline-block";
     item.style.opacity = "1";
     item.style.pointerEvents = "auto";
   });
 
-  masonryReflow();
-
-  // Apply default Portrait filter
   document.querySelector('.filter-btn[data-filter="portrait"]').click();
+
+  setTimeout(masonryReflow, 50);
 
 });
