@@ -1,11 +1,5 @@
-// ===============================
-// DOM READY
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // -------------------------------
-  // ELEMENT REFERENCES
-  // -------------------------------
   const navMenu = document.getElementById("navMenu");
   const hamburger = document.getElementById("hamburger");
   const homeButton = document.getElementById("homeButton");
@@ -24,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const fadeUps = document.querySelectorAll(".fade-up");
 
   let currentIndex = 0;
-  const galleryArray = Array.from(galleryItems);
 
 
   // ===============================
@@ -36,30 +29,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ===============================
-  // MOBILE NAV TOGGLE
+  // MOBILE NAV
   // ===============================
-  if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-    });
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+  });
 
-    navMenu.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-      });
-    });
-  }
+  navMenu.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => navMenu.classList.remove("open"));
+  });
 
 
   // ===============================
-  // FLOATING HOME BUTTON
+  // HOME BUTTON
   // ===============================
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) {
-      homeButton.classList.add("visible");
-    } else {
-      homeButton.classList.remove("visible");
-    }
+    homeButton.classList.toggle("visible", window.scrollY > 400);
   });
 
   homeButton.addEventListener("click", () => {
@@ -78,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.2 });
 
     fadeUps.forEach(el => observer.observe(el));
   } else {
@@ -87,59 +72,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ===============================
-  // ENABLE FILTERING *AFTER* IMAGES LOAD
+  // FILTERING (Portrait + Live only)
   // ===============================
-  window.addEventListener("load", () => {
-    enableFiltering();
-  });
-
-  function enableFiltering() {
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const filter = btn.getAttribute("data-filter");
-
-        // Active button styling
-        filterButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // Show/hide items
-        galleryItems.forEach(item => {
-          const category = item.getAttribute("data-category");
-
-          if (filter === "all" || category === filter) {
-            item.style.display = "inline-block";   // CRITICAL for masonry
-            item.style.opacity = "1";
-            item.style.pointerEvents = "auto";
-          } else {
-            item.style.display = "none";
-            item.style.opacity = "0";
-            item.style.pointerEvents = "none";
-          }
-        });
-      });
-    });
+  function masonryReflow() {
+    const grid = document.querySelector(".gallery-grid");
+    grid.style.display = "none";
+    void grid.offsetHeight;
+    grid.style.display = "";
   }
 
+  function getVisibleItems() {
+    return Array.from(galleryItems).filter(
+      item => item.style.display !== "none"
+    );
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      galleryItems.forEach(item => {
+        const category = item.getAttribute("data-category");
+
+        if (category === filter) {
+          item.style.display = "inline-block";
+          item.style.opacity = "1";
+          item.style.pointerEvents = "auto";
+        } else {
+          item.style.display = "none";
+          item.style.opacity = "0";
+          item.style.pointerEvents = "none";
+        }
+      });
+
+      masonryReflow();
+    });
+  });
+
 
   // ===============================
-  // LIGHTBOX OPEN
+  // LIGHTBOX (Visible items only)
   // ===============================
-  galleryItems.forEach((item, index) => {
+  galleryItems.forEach((item) => {
     const img = item.querySelector("img");
 
     img.addEventListener("click", () => {
-      currentIndex = index;
+      const visible = getVisibleItems();
+      currentIndex = visible.indexOf(item);
       openLightbox();
     });
   });
 
   function openLightbox() {
-    const item = galleryArray[currentIndex];
+    const visible = getVisibleItems();
+    const item = visible[currentIndex];
+
     const img = item.querySelector("img");
     const label = item.querySelector(".photo-label");
 
     lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt || "";
     lightboxCaption.textContent = label ? label.textContent : "";
 
     lightbox.classList.add("open");
@@ -150,33 +144,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showPrev() {
-    currentIndex = (currentIndex - 1 + galleryArray.length) % galleryArray.length;
+    const visible = getVisibleItems();
+    currentIndex = (currentIndex - 1 + visible.length) % visible.length;
     openLightbox();
   }
 
   function showNext() {
-    currentIndex = (currentIndex + 1) % galleryArray.length;
+    const visible = getVisibleItems();
+    currentIndex = (currentIndex + 1) % visible.length;
     openLightbox();
   }
 
-
-  // ===============================
-  // LIGHTBOX CONTROLS
-  // ===============================
   lightboxClose.addEventListener("click", closeLightbox);
   lightboxPrev.addEventListener("click", showPrev);
   lightboxNext.addEventListener("click", showNext);
 
-  // Close when clicking outside image
   lightbox.addEventListener("click", e => {
     if (e.target === lightbox) closeLightbox();
   });
 
-  // Close on ESC
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && lightbox.classList.contains("open")) {
-      closeLightbox();
-    }
+    if (e.key === "Escape") closeLightbox();
   });
 
 });
