@@ -14,9 +14,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- ⭐ STATCOUNTER INSTALLED HERE ⭐ -->
-  <!-- Default Statcounter code for KM Media Ventures
-  https://kmmediaventures.github.io/kmmediaventures/ -->
+  <!-- Statcounter -->
   <script type="text/javascript">
   var sc_project=13284940; 
   var sc_invisible=1; 
@@ -28,7 +26,6 @@
   href="https://statcounter.com/" target="_blank"><img class="statcounter"
   src="https://c.statcounter.com/13284940/0/d37089fe/1/" alt="Web Analytics"
   referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-  <!-- End of Statcounter Code -->
 
 </head>
 
@@ -82,8 +79,10 @@
     </section>
 
     <!-- ABOUT -->
+    <!-- NOTE: The about-photo div has been removed since there is no image for it yet.
+         To restore it, add an <img> with a valid src inside .about-photo and uncomment below. -->
     <section id="about">
-      <div class="container about-inner">
+      <div class="container about-inner about-no-photo">
         <div class="about-text fade-up">
           <h2>About KM Media Ventures</h2>
           <p class="section-subtitle">Story-driven visuals for artists, performers, and creatives.</p>
@@ -99,9 +98,11 @@
           </ul>
         </div>
 
+        <!-- Uncomment and add your image path when ready:
         <div class="about-photo fade-up">
-          <img src="..........." alt="Behind the scenes with KM Media Ventures" />
+          <img src="images/YOUR_IMAGE.jpg" alt="Behind the scenes with KM Media Ventures" />
         </div>
+        -->
       </div>
     </section>
 
@@ -115,6 +116,7 @@
         </div>
 
         <div class="filter-buttons fade-up">
+          <button class="filter-btn" data-filter="all">All</button>
           <button class="filter-btn" data-filter="portrait">Portraits</button>
           <button class="filter-btn" data-filter="live">Live Performances</button>
         </div>
@@ -198,12 +200,12 @@
     </section>
 
     <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
       <div class="lightbox-inner">
-        <button class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
-        <button class="lightbox-prev" id="lightboxPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
         <img id="lightboxImage" src="" alt="" />
-        <button class="lightbox-next" id="lightboxNext"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="lightbox-next" id="lightboxNext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
         <p class="lightbox-caption" id="lightboxCaption"></p>
       </div>
     </div>
@@ -217,22 +219,22 @@
         <div class="video-grid">
 
           <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/Ro0mDsHIzSY" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/Ro0mDsHIzSY" title="The Hired Guns Band" allowfullscreen></iframe>
             <h3>The Hired Guns Band</h3>
           </article>
 
           <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/LRzUfpNciTo" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/LRzUfpNciTo" title="Elderbug" allowfullscreen></iframe>
             <h3>Elderbug</h3>
           </article>
 
           <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/UWO4KHAyirQ" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/UWO4KHAyirQ" title="Symphony of the Mountains" allowfullscreen></iframe>
             <h3>Symphony of the Mountains</h3>
           </article>
 
           <article class="video-item">
-            <iframe src="https://www.youtube.com/embed/P7qXwdx3R8M" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/P7qXwdx3R8M" title="Dirty Grass Soles" allowfullscreen></iframe>
             <h3>Dirty Grass Soles</h3>
           </article>
 
@@ -245,9 +247,9 @@
       <div class="container contact-inner fade-up">
 
         <div class="contact-text">
-          <h2>Let’s work together</h2>
+          <h2>Let's work together</h2>
           <p class="section-subtitle">Tell me about your project</p>
-          <p>Whether you’re planning a performance, launching a new project, or need fresh visuals, I’d love to talk.</p>
+          <p>Whether you're planning a performance, launching a new project, or need fresh visuals, I'd love to talk.</p>
         </div>
 
         <form 
@@ -278,8 +280,8 @@
       <div>© <span id="year"></span> KM Media Ventures</div>
 
       <div class="footer-social">
-        <a href="https://www.facebook.com/share/1BUTXo6q2o/" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/fstop_ginger" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1BUTXo6q2o/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/fstop_ginger" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
   </footer>
