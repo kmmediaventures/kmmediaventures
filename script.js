@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================================
-  // DEFAULT FILTER ON LOAD (Portraits)
+  // DEFAULT FILTER ON LOAD (All)
   // =========================================================
   galleryItems.forEach(item => {
     item.style.display       = "inline-block";
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.style.pointerEvents = "auto";
   });
 
-  const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
+  const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
   if (defaultBtn) defaultBtn.click();
 
   setTimeout(masonryReflow, 50);
