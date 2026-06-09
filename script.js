@@ -3,20 +3,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // -------------------------------
   // ELEMENT REFERENCES
   // -------------------------------
-  const navMenu = document.getElementById("navMenu");
-  const hamburger = document.getElementById("hamburger");
-  const homeButton = document.getElementById("homeButton");
-  const yearSpan = document.getElementById("year");
+  const navMenu     = document.getElementById("navMenu");
+  const hamburger   = document.getElementById("hamburger");
+  const homeButton  = document.getElementById("homeButton");
+  const yearSpan    = document.getElementById("year");
 
   const filterButtons = document.querySelectorAll(".filter-btn");
-  const galleryItems = document.querySelectorAll(".gallery-item");
+  const galleryItems  = document.querySelectorAll(".gallery-item");
 
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
+  const lightbox        = document.getElementById("lightbox");
+  const lightboxImage   = document.getElementById("lightboxImage");
   const lightboxCaption = document.getElementById("lightboxCaption");
-  const lightboxClose = document.getElementById("lightboxClose");
-  const lightboxPrev = document.getElementById("lightboxPrev");
-  const lightboxNext = document.getElementById("lightboxNext");
+  const lightboxClose   = document.getElementById("lightboxClose");
+  const lightboxPrev    = document.getElementById("lightboxPrev");
+  const lightboxNext    = document.getElementById("lightboxNext");
 
   const fadeUps = document.querySelectorAll(".fade-up");
 
@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   function masonryReflow() {
     const grid = document.querySelector(".gallery-grid");
-    grid.style.display = "none";
-    void grid.offsetHeight; // force browser repaint
-    grid.style.display = "";
+    if (!grid) return;
+    grid.classList.add("reflow");
+    requestAnimationFrame(() => grid.classList.remove("reflow"));
   }
 
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================================
-  // FILTERING
+  // FILTERING — now supports "all" category
   // =========================================================
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -109,16 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show/hide items
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
+        const show = filter === "all" || category === filter;
 
-        if (category === filter) {
-          item.style.display = "inline-block";
-          item.style.opacity = "1";
-          item.style.pointerEvents = "auto";
-        } else {
-          item.style.display = "none";
-          item.style.opacity = "0";
-          item.style.pointerEvents = "none";
-        }
+        item.style.display        = show ? "inline-block" : "none";
+        item.style.opacity        = show ? "1" : "0";
+        item.style.pointerEvents  = show ? "auto" : "none";
       });
 
       masonryReflow();
@@ -141,19 +136,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openLightbox() {
     const visible = getVisibleItems();
-    const item = visible[currentIndex];
+    if (!visible.length) return;
 
-    const img = item.querySelector("img");
+    const item  = visible[currentIndex];
+    const img   = item.querySelector("img");
     const label = item.querySelector(".photo-label");
 
-    lightboxImage.src = img.src;
+    lightboxImage.src         = img.src;
+    lightboxImage.alt         = img.alt;
     lightboxCaption.textContent = label ? label.textContent : "";
 
     lightbox.classList.add("open");
+    document.body.style.overflow = "hidden"; // prevent background scroll
   }
 
   function closeLightbox() {
     lightbox.classList.remove("open");
+    document.body.style.overflow = "";
   }
 
   function showPrev() {
@@ -172,31 +171,71 @@ document.addEventListener("DOMContentLoaded", () => {
   lightboxPrev.addEventListener("click", showPrev);
   lightboxNext.addEventListener("click", showNext);
 
+  // Close on backdrop click
   lightbox.addEventListener("click", e => {
     if (e.target === lightbox) closeLightbox();
   });
 
+  // FIX: keyboard navigation — Escape, ArrowLeft, ArrowRight
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeLightbox();
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape")     closeLightbox();
+    if (e.key === "ArrowLeft")  showPrev();
+    if (e.key === "ArrowRight") showNext();
   });
 
 
   // =========================================================
   // DEFAULT FILTER ON LOAD (Portraits)
   // =========================================================
-
-  // Reset all items to visible before filtering
   galleryItems.forEach(item => {
-    item.style.display = "inline-block";
-    item.style.opacity = "1";
+    item.style.display       = "inline-block";
+    item.style.opacity       = "1";
     item.style.pointerEvents = "auto";
   });
 
-  // Trigger Portrait filter
   const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
-  defaultBtn.click();
+  if (defaultBtn) defaultBtn.click();
 
-  // Force masonry repaint AFTER filter applies
   setTimeout(masonryReflow, 50);
+
+
+  // =========================================================
+  // CONTACT FORM — AJAX submission with inline confirmation
+  // =========================================================
+  const contactForm = document.querySelector(".contact-form");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector("[type='submit']");
+      submitBtn.textContent = "Sending…";
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(contactForm.action, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: { Accept: "application/json" }
+        });
+
+        if (res.ok) {
+          contactForm.innerHTML = `
+            <p style="color: var(--accent); font-weight: 600; font-size: 1.05rem; padding: 20px 0;">
+              Thanks! I'll be in touch soon.
+            </p>`;
+        } else {
+          submitBtn.textContent = "Send message";
+          submitBtn.disabled = false;
+          alert("Something went wrong. Please try again or email directly.");
+        }
+      } catch {
+        submitBtn.textContent = "Send message";
+        submitBtn.disabled = false;
+        alert("Network error. Please check your connection and try again.");
+      }
+    });
+  }
 
 });
