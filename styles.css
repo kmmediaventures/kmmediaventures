@@ -171,8 +171,7 @@ h1, h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
+    background: var(--accent);
     border-radius: 50%;
     color: #fff;
     font-size: 1.3rem;
@@ -181,7 +180,7 @@ h1, h2, h3 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    z-index: 50;
+    z-index: 1000;
 }
  
 .floating-home.visible {
@@ -321,7 +320,6 @@ main {
     align-items: center;
 }
  
-/* When there's no photo, let text take full width */
 .about-inner.about-no-photo {
     grid-template-columns: 1fr;
 }
@@ -415,7 +413,6 @@ main {
     border-color: var(--accent);
 }
  
-/* Masonry */
 .gallery-grid {
     column-count: 2;
     column-gap: 16px;
@@ -499,7 +496,6 @@ main {
     border-radius: 8px;
 }
  
-/* Lightbox buttons — positioned relative to .lightbox-inner */
 .lightbox-inner button {
     position: absolute;
     background: rgba(0,0,0,0.6);
@@ -521,7 +517,6 @@ main {
     background: rgba(255,255,255,0.2);
 }
  
-/* FIX: close button inside the inner container, top-right corner */
 .lightbox-close {
     top: -44px;
     right: 0;
@@ -539,7 +534,6 @@ main {
     transform: translateY(-50%);
 }
  
-/* On small screens, move buttons inside the image area */
 @media (max-width: 600px) {
     .lightbox-close {
         top: 8px;
@@ -637,7 +631,6 @@ main {
     font-size: 0.95rem;
 }
  
-/* FIX: style labels */
 .contact-form label {
     display: block;
     font-size: 0.75rem;
@@ -666,7 +659,6 @@ main {
     border-color: transparent;
 }
  
-/* FIX: textarea height */
 .contact-form textarea {
     min-height: 140px;
     resize: vertical;
@@ -681,7 +673,6 @@ main {
     border-top: 1px solid rgba(255,255,255,0.06);
 }
  
-/* FIX: footer-inner flex layout */
 .footer-inner {
     display: flex;
     justify-content: space-between;
@@ -723,7 +714,6 @@ main {
     transform: translateY(0);
 }
  
-/* Respect user's reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .fade-up {
         opacity: 1;
@@ -731,4 +721,3 @@ main {
         transition: none;
     }
 }
- 
