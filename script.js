@@ -135,6 +135,61 @@ Code · CSS
 
 Script
 JS 
+my page now looks just black and white
+
+8:08 PM
+That's because the updated styles.css file I gave you is missing the accent color on nav links and a few other things — actually, the most likely culprit is that your browser is loading the new styles.css but something got lost. Can you check a couple things:
+
+Hard refresh the page — Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac) to clear the cache
+Check the file — open styles.css in GitHub and make sure the top of the file still has the :root variables, especially --accent: #e63946
+If it's still black and white after a hard refresh, paste what the top of your current styles.css looks like (the :root block) and I'll pinpoint exactly what's wrong.
+
+https://kmmediaventures.github.io/kmmediaventures/#home
+
+8:09 PM
+
+Fetched: KM Media Ventures
+Fetched: KM Media Ventures
+It looks like the live site is still showing the old index.html — the one without the "Book a Session" button and without the updated filter buttons. That means the new files haven't been pushed to GitHub yet.
+
+It sounds like you may have replaced the files locally but the changes aren't live. Here's what to check:
+
+Did you update the files on GitHub? The easiest way is directly in the browser:
+
+Go to https://github.com/kmmediaventures/kmmediaventures
+Click on styles.css → click the pencil icon (Edit) → paste in the new content → click Commit changes
+Repeat for script.js
+For index.html, find this line and change btn-primary to btn-teal:
+html
+   <a href="#contact" class="btn btn-teal">Book a Session</a>
+After committing, GitHub Pages usually takes 1–2 minutes to update. Then do a hard refresh (Ctrl+Shift+R) on your site.
+
+If the site still looks black and white after that, paste your current styles.css here and I'll find the problem!
+
+can you provide me with the updated indes, css, and js please
+
+8:10 PM
+
+Ran 2 commands, read a file
+Ran 2 commands, read a file
+All three files are ready to download. Here's how to get them live:
+
+Go to https://github.com/kmmediaventures/kmmediaventures
+Click each file (index.html, styles.css, script.js) → click the pencil icon to edit → select all, delete, paste the new content → Commit changes
+Wait 1–2 minutes, then hard refresh your site with Ctrl+Shift+R
+The changes you'll see:
+
+"Book a Session" button is now teal, distinct from the red buttons
+Nav links only highlight when you're scrolled into that section — no more Photography lighting up on load
+
+Index
+Code · HTML 
+
+Styles
+Code · CSS 
+
+Script
+JS 
 
 Claude Code is built into this app
 
