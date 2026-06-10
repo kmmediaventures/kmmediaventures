@@ -1,14 +1,12 @@
-
-Script · JS
 document.addEventListener("DOMContentLoaded", () => {
  
-  // -------------------------------
+  // =========================================================
   // ELEMENT REFERENCES
-  // -------------------------------
-  const navMenu     = document.getElementById("navMenu");
-  const hamburger   = document.getElementById("hamburger");
-  const homeButton  = document.getElementById("homeButton");
-  const yearSpan    = document.getElementById("year");
+  // =========================================================
+  const hamburger  = document.getElementById("hamburger");
+  const navMenu    = document.getElementById("navMenu");
+  const homeButton = document.getElementById("homeButton");
+  const yearSpan   = document.getElementById("year");
  
   const filterButtons = document.querySelectorAll(".filter-btn");
   const galleryItems  = document.querySelectorAll(".gallery-item");
@@ -24,38 +22,42 @@ document.addEventListener("DOMContentLoaded", () => {
  
   let currentIndex = 0;
  
- 
   // =========================================================
   // FOOTER YEAR
   // =========================================================
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+ 
+  // =========================================================
+  // MOBILE NAV HAMBURGER
+  // =========================================================
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function() {
+      navMenu.classList.toggle("open");
+    });
+ 
+    navMenu.querySelectorAll(".nav-link").forEach(function(link) {
+      link.addEventListener("click", function() {
+        navMenu.classList.remove("open");
+      });
+    });
   }
- 
- 
-  // =========================================================
-  // MOBILE NAV
-  // =========================================================
-  hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
-  });
- 
-  navMenu.querySelectorAll(".nav-link").forEach(link => {
-    link.addEventListener("click", () => navMenu.classList.remove("open"));
-  });
- 
  
   // =========================================================
   // FLOATING HOME BUTTON
   // =========================================================
-  window.addEventListener("scroll", () => {
-    homeButton.classList.toggle("visible", window.scrollY > 400);
-  });
+  if (homeButton) {
+    window.addEventListener("scroll", function() {
+      if (window.pageYOffset > 300) {
+        homeButton.classList.add("visible");
+      } else {
+        homeButton.classList.remove("visible");
+      }
+    });
  
-  homeButton.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
- 
+    homeButton.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
  
   // =========================================================
   // ACTIVE NAV LINK ON SCROLL
@@ -64,117 +66,104 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll("main section[id]");
  
   function updateActiveNav() {
-    let current = "";
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      if (window.scrollY >= sectionTop) {
+    var current = "";
+    sections.forEach(function(section) {
+      if (window.pageYOffset >= section.offsetTop - 120) {
         current = section.getAttribute("id");
       }
     });
- 
-    navLinks.forEach(link => {
+    navLinks.forEach(function(link) {
       link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
+      if (link.getAttribute("href") === "#" + current) {
         link.classList.add("active");
       }
     });
   }
  
   window.addEventListener("scroll", updateActiveNav);
-  updateActiveNav(); // run once on load
- 
+  updateActiveNav();
  
   // =========================================================
   // FADE-UP ANIMATIONS
   // =========================================================
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
  
-    fadeUps.forEach(el => observer.observe(el));
+    fadeUps.forEach(function(el) { observer.observe(el); });
   } else {
-    fadeUps.forEach(el => el.classList.add("visible"));
+    fadeUps.forEach(function(el) { el.classList.add("visible"); });
   }
- 
  
   // =========================================================
   // MASONRY REFLOW
   // =========================================================
   function masonryReflow() {
-    const grid = document.querySelector(".gallery-grid");
+    var grid = document.querySelector(".gallery-grid");
     if (!grid) return;
-    grid.classList.add("reflow");
-    requestAnimationFrame(() => grid.classList.remove("reflow"));
+    grid.style.display = "none";
+    requestAnimationFrame(function() { grid.style.display = ""; });
   }
- 
  
   // =========================================================
   // GET VISIBLE ITEMS
   // =========================================================
   function getVisibleItems() {
-    return Array.from(galleryItems).filter(
-      item => item.style.display !== "none"
-    );
+    return Array.from(galleryItems).filter(function(item) {
+      return item.style.display !== "none";
+    });
   }
- 
  
   // =========================================================
   // FILTERING
   // =========================================================
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
+  filterButtons.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var filter = btn.getAttribute("data-filter");
  
-      // Update active button
-      filterButtons.forEach(b => b.classList.remove("active"));
+      filterButtons.forEach(function(b) { b.classList.remove("active"); });
       btn.classList.add("active");
  
-      // Show/hide items
-      galleryItems.forEach(item => {
-        const category = item.getAttribute("data-category");
-        const show = filter === "all" || category === filter;
- 
-        item.style.display        = show ? "inline-block" : "none";
-        item.style.opacity        = show ? "1" : "0";
-        item.style.pointerEvents  = show ? "auto" : "none";
+      galleryItems.forEach(function(item) {
+        var category = item.getAttribute("data-category");
+        var show = filter === "all" || category === filter;
+        item.style.display      = show ? "inline-block" : "none";
+        item.style.opacity      = show ? "1" : "0";
+        item.style.pointerEvents = show ? "auto" : "none";
       });
  
       masonryReflow();
     });
   });
  
- 
   // =========================================================
-  // LIGHTBOX — Visible Items Only
+  // LIGHTBOX
   // =========================================================
-  galleryItems.forEach(item => {
-    const img = item.querySelector("img");
- 
-    img.addEventListener("click", () => {
-      const visible = getVisibleItems();
+  galleryItems.forEach(function(item) {
+    var img = item.querySelector("img");
+    if (!img) return;
+    img.addEventListener("click", function() {
+      var visible = getVisibleItems();
       currentIndex = visible.indexOf(item);
       openLightbox();
     });
   });
  
   function openLightbox() {
-    const visible = getVisibleItems();
+    var visible = getVisibleItems();
     if (!visible.length) return;
- 
-    const item  = visible[currentIndex];
-    const img   = item.querySelector("img");
-    const label = item.querySelector(".photo-label");
- 
+    var item  = visible[currentIndex];
+    var img   = item.querySelector("img");
+    var label = item.querySelector(".photo-label");
     lightboxImage.src           = img.src;
     lightboxImage.alt           = img.alt;
     lightboxCaption.textContent = label ? label.textContent : "";
- 
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
   }
@@ -185,87 +174,80 @@ document.addEventListener("DOMContentLoaded", () => {
   }
  
   function showPrev() {
-    const visible = getVisibleItems();
+    var visible = getVisibleItems();
     currentIndex = (currentIndex - 1 + visible.length) % visible.length;
     openLightbox();
   }
  
   function showNext() {
-    const visible = getVisibleItems();
+    var visible = getVisibleItems();
     currentIndex = (currentIndex + 1) % visible.length;
     openLightbox();
   }
  
-  lightboxClose.addEventListener("click", closeLightbox);
-  lightboxPrev.addEventListener("click", showPrev);
-  lightboxNext.addEventListener("click", showNext);
+  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+  if (lightboxPrev)  lightboxPrev.addEventListener("click", showPrev);
+  if (lightboxNext)  lightboxNext.addEventListener("click", showNext);
  
-  // Close on backdrop click
-  lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  if (lightbox) {
+    lightbox.addEventListener("click", function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
  
-  // Keyboard navigation
-  document.addEventListener("keydown", e => {
-    if (!lightbox.classList.contains("open")) return;
+  document.addEventListener("keydown", function(e) {
+    if (!lightbox || !lightbox.classList.contains("open")) return;
     if (e.key === "Escape")     closeLightbox();
     if (e.key === "ArrowLeft")  showPrev();
     if (e.key === "ArrowRight") showNext();
   });
  
- 
   // =========================================================
-  // DEFAULT FILTER ON LOAD (All) — silent, no nav side-effects
+  // DEFAULT FILTER ON LOAD
   // =========================================================
-  galleryItems.forEach(item => {
+  galleryItems.forEach(function(item) {
     item.style.display       = "inline-block";
     item.style.opacity       = "1";
     item.style.pointerEvents = "auto";
   });
  
-  const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
+  var defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
   if (defaultBtn) defaultBtn.classList.add("active");
  
   setTimeout(masonryReflow, 50);
  
- 
   // =========================================================
-  // CONTACT FORM — AJAX submission with inline confirmation
+  // CONTACT FORM
   // =========================================================
-  const contactForm = document.querySelector(".contact-form");
+  var contactForm = document.querySelector(".contact-form");
  
   if (contactForm) {
-    contactForm.addEventListener("submit", async e => {
+    contactForm.addEventListener("submit", async function(e) {
       e.preventDefault();
- 
-      const submitBtn = contactForm.querySelector("[type='submit']");
+      var submitBtn = contactForm.querySelector("[type='submit']");
       submitBtn.textContent = "Sending…";
       submitBtn.disabled = true;
  
       try {
-        const res = await fetch(contactForm.action, {
+        var res = await fetch(contactForm.action, {
           method: "POST",
           body: new FormData(contactForm),
           headers: { Accept: "application/json" }
         });
  
         if (res.ok) {
-          contactForm.innerHTML = `
-            <p style="color: var(--accent); font-weight: 600; font-size: 1.05rem; padding: 20px 0;">
-              Thanks! I'll be in touch soon.
-            </p>`;
+          contactForm.innerHTML = '<p style="color:var(--accent);font-weight:600;font-size:1.05rem;padding:20px 0;">Thanks! I\'ll be in touch soon.</p>';
         } else {
           submitBtn.textContent = "Send message";
           submitBtn.disabled = false;
-          alert("Something went wrong. Please try again or email directly.");
+          alert("Something went wrong. Please try again.");
         }
-      } catch {
+      } catch(err) {
         submitBtn.textContent = "Send message";
         submitBtn.disabled = false;
-        alert("Network error. Please check your connection and try again.");
+        alert("Network error. Please check your connection.");
       }
     });
   }
  
 });
- 
