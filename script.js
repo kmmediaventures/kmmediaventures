@@ -1,48 +1,45 @@
-// -----------------------------
-// FLOATING MENU TOGGLE
-// -----------------------------
-const menuToggle = document.getElementById("menuToggle");
-const floatingMenu = document.getElementById("floatingMenu");
+/* =========================================================
+   MOBILE NAV (Hamburger Menu)
+   ========================================================= */
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
 
-menuToggle.addEventListener("click", () => {
-    floatingMenu.classList.toggle("open");
+hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
 });
 
-// Close menu when clicking outside
 document.addEventListener("click", (e) => {
-    if (!floatingMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-        floatingMenu.classList.remove("open");
+    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        navMenu.classList.remove("open");
     }
 });
 
 
-// -----------------------------
-// CLIENT LOGIN MODAL
-// -----------------------------
-const loginBtn = document.getElementById("clientLoginBtn");
-const passwordModal = document.getElementById("passwordModal");
-const closeModal = document.getElementById("closePasswordModal");
+/* =========================================================
+   FLOATING HOME BUTTON
+   ========================================================= */
+const homeButton = document.getElementById("homeButton");
 
-loginBtn.addEventListener("click", () => {
-    passwordModal.style.display = "flex";
-});
-
-closeModal.addEventListener("click", () => {
-    passwordModal.style.display = "none";
-});
-
-// Close modal when clicking outside the box
-window.addEventListener("click", (e) => {
-    if (e.target === passwordModal) {
-        passwordModal.style.display = "none";
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        homeButton.classList.add("visible");
+    } else {
+        homeButton.classList.remove("visible");
     }
 });
 
+homeButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-// -----------------------------
-// PASSWORD → GOOGLE DRIVE FOLDER
-// -----------------------------
-const clientFolders = {
-    "smith2024": "https://drive.google.com/drive/folders/XXXXXXX",
-    "johnsonfam": "https://drive.google.com/drive/folders/YYYYYYY",
-    "baseball2024": "https://drive.google.com/drive/folders/ZZ
+
+/* =========================================================
+   FADE-UP ANIMATIONS
+   ========================================================= */
+const fadeElements = document.querySelectorAll(".fade-up");
+
+const fadeObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.class
