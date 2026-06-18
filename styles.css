@@ -116,10 +116,7 @@ h1, h2, h3 {
     transition: 0.2s ease;
 }
 
-.nav-link:hover {
-    color: var(--accent);
-}
-
+.nav-link:hover,
 .nav-link.active {
     color: var(--accent);
 }
@@ -494,16 +491,6 @@ main {
     background: rgba(0,0,0,0.12);
 }
 
-.photo-label {
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    background: rgba(0,0,0,0.7);
-    padding: 4px 10px;
-    border-radius: var(--radius-lg);
-    font-size: 0.7rem;
-}
-
 /* =========================================================
    LIGHTBOX
    ========================================================= */
@@ -520,7 +507,7 @@ main {
     transition: opacity 0.25s ease;
 }
 
-.lightbox.open {
+.lightbox.active {
     opacity: 1;
     pointer-events: auto;
 }
@@ -766,114 +753,4 @@ main {
 
 .footer-social a:hover {
     color: var(--accent);
-}
-
-/* =========================================================
-   FADE-UP
-   ========================================================= */
-.fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .fade-up {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
-
-/* CLIENT PASSWORD MODAL STYLES */
-.password-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(3,4,6,0.7);
-  z-index: 100000;
-  padding: 24px;
-}
-
-.password-modal.open {
-  display: flex;
-}
-
-.password-box {
-  width: 100%;
-  max-width: 420px;
-  background: var(--bg-panel);
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-  position: relative;
-  color: var(--text-main);
-}
-
-.password-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.password-box h2 {
-  margin-bottom: 6px;
-}
-
-.password-instruction {
-  color: var(--muted);
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-}
-
-.password-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.password-row input {
-  flex: 1;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: var(--bg-card);
-  color: #fff;
-  font-size: 0.95rem;
-}
-
-.toggle-show {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.password-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 6px;
-}
-
-.password-error {
-  color: #ffb3b8;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  min-height: 1.2rem;
 }
