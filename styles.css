@@ -756,9 +756,12 @@ main {
 }
 
 /* =========================================================
-   FADE-UP
+   CLIENT LOGIN MODAL
    ========================================================= */
-.fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition
+.password-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    
