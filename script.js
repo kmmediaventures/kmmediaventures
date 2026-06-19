@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
           loginError.style.display = "block";
         }
       }, 800);
-    }
-    });
-});
+  });
+
+}
   
