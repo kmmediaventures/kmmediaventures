@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
- 
+
   // =========================================================
   // ELEMENT REFERENCES
   // =========================================================
@@ -7,26 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMenu    = document.getElementById("navMenu");
   const homeButton = document.getElementById("homeButton");
   const yearSpan   = document.getElementById("year");
- 
+
   const filterButtons = document.querySelectorAll(".filter-btn");
   const galleryItems  = document.querySelectorAll(".gallery-item");
- 
+
   const lightbox        = document.getElementById("lightbox");
   const lightboxImage   = document.getElementById("lightboxImage");
   const lightboxCaption = document.getElementById("lightboxCaption");
   const lightboxClose   = document.getElementById("lightboxClose");
   const lightboxPrev    = document.getElementById("lightboxPrev");
   const lightboxNext    = document.getElementById("lightboxNext");
- 
+
   const fadeUps = document.querySelectorAll(".fade-up");
- 
+
   let currentIndex = 0;
- 
+
   // =========================================================
   // FOOTER YEAR
   // =========================================================
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
- 
+
   // =========================================================
   // MOBILE NAV HAMBURGER
   // =========================================================
@@ -34,14 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.addEventListener("click", function() {
       navMenu.classList.toggle("open");
     });
- 
+
     navMenu.querySelectorAll(".nav-link").forEach(function(link) {
       link.addEventListener("click", function() {
         navMenu.classList.remove("open");
       });
     });
   }
- 
+
   // =========================================================
   // FLOATING HOME BUTTON
   // =========================================================
@@ -53,20 +53,20 @@ document.addEventListener("DOMContentLoaded", () => {
         homeButton.classList.remove("visible");
       }
     });
- 
+
     homeButton.addEventListener("click", function() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
- 
+
   // =========================================================
   // ACTIVE NAV LINK ON SCROLL
   // =========================================================
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("main section[id]");
- 
+
   function updateActiveNav() {
-    var current = "";
+    let current = "";
     sections.forEach(function(section) {
       if (window.pageYOffset >= section.offsetTop - 120) {
         current = section.getAttribute("id");
@@ -79,15 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
- 
+
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
- 
+
   // =========================================================
   // FADE-UP ANIMATIONS
   // =========================================================
   if ("IntersectionObserver" in window) {
-    var observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
@@ -95,113 +95,111 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }, { threshold: 0.15 });
- 
+
     fadeUps.forEach(function(el) { observer.observe(el); });
   } else {
     fadeUps.forEach(function(el) { el.classList.add("visible"); });
   }
- 
+
   // =========================================================
   // MASONRY REFLOW
   // =========================================================
   function masonryReflow() {
-    var grid = document.querySelector(".gallery-grid");
+    const grid = document.querySelector(".gallery-grid");
     if (!grid) return;
     grid.style.display = "none";
-    requestAnimationFrame(function() { grid.style.display = ""; });
+    requestAnimationFrame(() => { grid.style.display = ""; });
   }
- 
+
   // =========================================================
   // GET VISIBLE ITEMS
   // =========================================================
   function getVisibleItems() {
-    return Array.from(galleryItems).filter(function(item) {
-      return item.style.display !== "none";
-    });
+    return Array.from(galleryItems).filter(item => item.style.display !== "none");
   }
- 
+
   // =========================================================
   // FILTERING
   // =========================================================
   filterButtons.forEach(function(btn) {
     btn.addEventListener("click", function() {
-      var filter = btn.getAttribute("data-filter");
- 
-      filterButtons.forEach(function(b) { b.classList.remove("active"); });
+      const filter = btn.getAttribute("data-filter");
+
+      filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
- 
+
       galleryItems.forEach(function(item) {
-        var category = item.getAttribute("data-category");
-        var show = filter === "all" || category === filter;
+        const category = item.getAttribute("data-category");
+        const show = filter === "all" || category === filter;
         item.style.display      = show ? "inline-block" : "none";
         item.style.opacity      = show ? "1" : "0";
         item.style.pointerEvents = show ? "auto" : "none";
       });
- 
+
       masonryReflow();
     });
   });
- 
+
   // =========================================================
   // LIGHTBOX
   // =========================================================
   galleryItems.forEach(function(item) {
-    var img = item.querySelector("img");
+    const img = item.querySelector("img");
     if (!img) return;
     img.addEventListener("click", function() {
-      var visible = getVisibleItems();
+      const visible = getVisibleItems();
       currentIndex = visible.indexOf(item);
       openLightbox();
     });
   });
- 
+
   function openLightbox() {
-    var visible = getVisibleItems();
+    const visible = getVisibleItems();
     if (!visible.length) return;
-    var item  = visible[currentIndex];
-    var img   = item.querySelector("img");
-    var label = item.querySelector(".photo-label");
+    const item  = visible[currentIndex];
+    const img   = item.querySelector("img");
+    const label = item.querySelector(".photo-label");
     lightboxImage.src           = img.src;
     lightboxImage.alt           = img.alt;
     lightboxCaption.textContent = label ? label.textContent : "";
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
   }
- 
+
   function closeLightbox() {
     lightbox.classList.remove("open");
     document.body.style.overflow = "";
   }
- 
+
   function showPrev() {
-    var visible = getVisibleItems();
+    const visible = getVisibleItems();
     currentIndex = (currentIndex - 1 + visible.length) % visible.length;
     openLightbox();
   }
- 
+
   function showNext() {
-    var visible = getVisibleItems();
+    const visible = getVisibleItems();
     currentIndex = (currentIndex + 1) % visible.length;
     openLightbox();
   }
- 
+
   if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
   if (lightboxPrev)  lightboxPrev.addEventListener("click", showPrev);
   if (lightboxNext)  lightboxNext.addEventListener("click", showNext);
- 
+
   if (lightbox) {
     lightbox.addEventListener("click", function(e) {
       if (e.target === lightbox) closeLightbox();
     });
   }
- 
+
   document.addEventListener("keydown", function(e) {
     if (!lightbox || !lightbox.classList.contains("open")) return;
     if (e.key === "Escape")     closeLightbox();
     if (e.key === "ArrowLeft")  showPrev();
     if (e.key === "ArrowRight") showNext();
   });
- 
+
   // =========================================================
   // DEFAULT FILTER ON LOAD
   // =========================================================
@@ -210,33 +208,34 @@ document.addEventListener("DOMContentLoaded", () => {
     item.style.opacity       = "1";
     item.style.pointerEvents = "auto";
   });
- 
-  var defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
+
+  const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
   if (defaultBtn) defaultBtn.classList.add("active");
- 
+
   setTimeout(masonryReflow, 50);
- 
+
   // =========================================================
   // CONTACT FORM
   // =========================================================
-  var contactForm = document.querySelector(".contact-form");
- 
+  const contactForm = document.querySelector(".contact-form");
+
   if (contactForm) {
     contactForm.addEventListener("submit", async function(e) {
       e.preventDefault();
-      var submitBtn = contactForm.querySelector("[type='submit']");
+      const submitBtn = contactForm.querySelector("[type='submit']");
       submitBtn.textContent = "Sending…";
       submitBtn.disabled = true;
- 
+
       try {
-        var res = await fetch(contactForm.action, {
+        const res = await fetch(contactForm.action, {
           method: "POST",
           body: new FormData(contactForm),
           headers: { Accept: "application/json" }
         });
- 
+
         if (res.ok) {
-          contactForm.innerHTML = '<p style="color:var(--accent);font-weight:600;font-size:1.05rem;padding:20px 0;">Thanks! I\'ll be in touch soon.</p>';
+          contactForm.innerHTML =
+            '<p style="color:var(--accent);font-weight:600;font-size:1.05rem;padding:20px 0;">Thanks! I\'ll be in touch soon.</p>';
         } else {
           submitBtn.textContent = "Send message";
           submitBtn.disabled = false;
@@ -250,96 +249,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
- // =========================================================
-// LOGIN MODAL
-// =========================================================
-const loginBtn      = document.getElementById("clientLoginBtn");
-const loginModal    = document.getElementById("loginModal");
-const loginClose    = document.getElementById("loginClose");
-const loginSubmit   = document.getElementById("loginSubmit");
-const loginError    = document.getElementById("loginError");
-const loginPassword = document.getElementById("loginPassword");
+  // =========================================================
+  // LOGIN MODAL (FINAL, CLEAN VERSION)
+  // =========================================================
+  const loginBtn      = document.getElementById("clientLoginBtn");
+  const loginModal    = document.getElementById("loginModal");
+  const loginClose    = document.getElementById("loginClose");
+  const loginSubmit   = document.getElementById("loginSubmit");
+  const loginError    = document.getElementById("loginError");
+  const loginPassword = document.getElementById("loginPassword");
+  const loginSpinner  = document.getElementById("loginSpinner");
 
-// Open modal
-if (loginBtn) {
-  loginBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-    loginModal.style.display = "flex";
-    loginPassword.value = "";
-    loginError.style.display = "none";
-  });
-}
+  if (loginBtn && loginModal) {
 
-// Close modal (X button)
-if (loginClose) {
-  loginClose.addEventListener("click", function() {
-    loginModal.style.display = "none";
-  });
-}
+    // Open modal
+    loginBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      loginModal.style.display = "flex";
+      loginPassword.value = "";
+      loginError.style.display = "none";
+      loginSpinner.style.display = "none";
+      loginSubmit.disabled = false;
+      loginSubmit.style.opacity = "1";
+    });
 
-// Close modal when clicking outside content
-if (loginModal) {
-  loginModal.addEventListener("click", function(e) {
-    if (e.target === loginModal) {
+    // Close modal (X)
+    loginClose.addEventListener("click", function() {
       loginModal.style.display = "none";
-    }
-  });
-}
+    });
 
-// Password check
-if (loginSubmit) {
-  loginSubmit.addEventListener("click", function() {
-    const correctPassword = "km2025";
-
-    // Show spinner + disable button
-    const spinner = document.getElementById("loginSpinner");
-    spinner.style.display = "block";
-    loginSubmit.style.opacity = "0.5";
-    loginSubmit.disabled = true;
-
-    setTimeout(() => {
-      if (loginPassword.value === correctPassword) {
-        window.location.href = "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
-      } else {
-        spinner.style.display = "none";
-        loginSubmit.style.opacity = "1";
-        loginSubmit.disabled = false;
-        loginError.style.display = "block";
+    // Close when clicking outside modal
+    loginModal.addEventListener("click", function(e) {
+      if (e.target === loginModal) {
+        loginModal.style.display = "none";
       }
-    }, 800); // slight delay for smooth UX
-  });
-}
+    });
 
-// Close modal (X)
-if (loginClose) {
-  loginClose.addEventListener("click", function() {
-    loginModal.style.display = "none";
-  });
-}
+    // Submit password
+    loginSubmit.addEventListener("click", function() {
+      const correctPassword = "km2025";
 
-// Close when clicking outside modal
-if (loginModal) {
-  loginModal.addEventListener("click", function(e) {
-    if (e.target === loginModal) {
-      loginModal.style.display = "none";
-    }
-  });
-}
+      loginError.style.display = "none";
+      loginSpinner.style.display = "block";
+      loginSubmit.disabled = true;
+      loginSubmit.style.opacity = "0.5";
 
-// Password check
-if (loginSubmit) {
-  loginSubmit.addEventListener("click", function() {
-    const correctPassword = "km2025";
+      setTimeout(() => {
+        if (loginPassword.value === correctPassword) {
+          window.location.href =
+            "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
+        } else {
+          loginSpinner.style.display = "none";
+          loginSubmit.disabled = false;
+          loginSubmit.style.opacity = "1";
+          loginError.style.display = "block";
+        }
+      }, 800);
+    });
+  }
 
-    if (loginPassword.value === correctPassword) {
-      window.location.href = "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
-    } else {
-      loginError.style.display = "block";
-    }
-  });
-}
-   
-  });
-}
- 
 });
