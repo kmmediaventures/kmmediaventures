@@ -289,31 +289,24 @@ if (loginModal) {
 // Password check
 if (loginSubmit) {
   loginSubmit.addEventListener("click", function() {
-    const correctPassword = "yourpassword"; // <-- change this
+    const correctPassword = "km2025";
 
-    if (loginPassword.value === correctPassword) {
-      window.location.href = "clients.html"; // <-- change to your client page
-    } else {
-      loginError.style.display = "block";
-    }
+    // Show spinner + disable button
+    const spinner = document.getElementById("loginSpinner");
+    spinner.style.display = "block";
+    loginSubmit.style.opacity = "0.5";
+    loginSubmit.disabled = true;
 
-// =========================================================
-// LOGIN MODAL
-// =========================================================
-const loginBtn      = document.getElementById("clientLoginBtn");
-const loginModal    = document.getElementById("loginModal");
-const loginClose    = document.getElementById("loginClose");
-const loginSubmit   = document.getElementById("loginSubmit");
-const loginError    = document.getElementById("loginError");
-const loginPassword = document.getElementById("loginPassword");
-
-// Open modal
-if (loginBtn) {
-  loginBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-    loginModal.style.display = "flex";
-    loginPassword.value = "";
-    loginError.style.display = "none";
+    setTimeout(() => {
+      if (loginPassword.value === correctPassword) {
+        window.location.href = "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
+      } else {
+        spinner.style.display = "none";
+        loginSubmit.style.opacity = "1";
+        loginSubmit.disabled = false;
+        loginError.style.display = "block";
+      }
+    }, 800); // slight delay for smooth UX
   });
 }
 
