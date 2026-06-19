@@ -782,5 +782,123 @@ main {
   font-size: 1.5rem;
   cursor: pointer;
 }
-   
+  /* =========================================================
+   LOGIN MODAL
+   ========================================================= */
+.login-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.login-content {
+  background: #111;
+  padding: 30px 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  animation: slideUp 0.3s ease-out;
+}
+
+.login-content h2 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.login-content input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-content input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 255, 200, 0.25);
+}
+
+/* MATCH YOUR SITE'S BUTTON STYLE */
+.login-content button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  background: var(--accent);
+  color: #000;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.login-content button:hover {
+  background: #00e0b5;
+}
+
+/* SPINNER (hidden by default) */
+.login-spinner {
+  display: none;
+  margin: 15px auto 0;
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Close button */
+.login-content .close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s ease;
+}
+
+.login-content .close:hover {
+  color: #fff;
+}
+
+/* Error message */
+#loginError {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #ff4d4d;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+} 
 }
