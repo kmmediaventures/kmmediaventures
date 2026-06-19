@@ -296,8 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         if (loginPassword.value === correctPassword) {
-          window.location.href =
+          window.open(
             "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
+          );
         } else {
           loginSpinner.style.display = "none";
           loginSubmit.disabled = false;
