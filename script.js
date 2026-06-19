@@ -296,6 +296,56 @@ if (loginSubmit) {
     } else {
       loginError.style.display = "block";
     }
+
+// =========================================================
+// LOGIN MODAL
+// =========================================================
+const loginBtn      = document.getElementById("clientLoginBtn");
+const loginModal    = document.getElementById("loginModal");
+const loginClose    = document.getElementById("loginClose");
+const loginSubmit   = document.getElementById("loginSubmit");
+const loginError    = document.getElementById("loginError");
+const loginPassword = document.getElementById("loginPassword");
+
+// Open modal
+if (loginBtn) {
+  loginBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    loginModal.style.display = "flex";
+    loginPassword.value = "";
+    loginError.style.display = "none";
+  });
+}
+
+// Close modal (X)
+if (loginClose) {
+  loginClose.addEventListener("click", function() {
+    loginModal.style.display = "none";
+  });
+}
+
+// Close when clicking outside modal
+if (loginModal) {
+  loginModal.addEventListener("click", function(e) {
+    if (e.target === loginModal) {
+      loginModal.style.display = "none";
+    }
+  });
+}
+
+// Password check
+if (loginSubmit) {
+  loginSubmit.addEventListener("click", function() {
+    const correctPassword = "km2025";
+
+    if (loginPassword.value === correctPassword) {
+      window.location.href = "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
+    } else {
+      loginError.style.display = "block";
+    }
+  });
+}
+   
   });
 }
  
