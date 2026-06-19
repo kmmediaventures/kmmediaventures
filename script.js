@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // MOBILE NAV HAMBURGER
   // =========================================================
   if (hamburger && navMenu) {
-    hamburger.addEventListener("click", function() {
+    hamburger.addEventListener("click", () => {
       navMenu.classList.toggle("open");
     });
 
-    navMenu.querySelectorAll(".nav-link").forEach(function(link) {
-      link.addEventListener("click", function() {
+    navMenu.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
         navMenu.classList.remove("open");
       });
     });
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // FLOATING HOME BUTTON
   // =========================================================
   if (homeButton) {
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", () => {
       if (window.pageYOffset > 300) {
         homeButton.classList.add("visible");
       } else {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    homeButton.addEventListener("click", function() {
+    homeButton.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
@@ -67,12 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateActiveNav() {
     let current = "";
-    sections.forEach(function(section) {
+    sections.forEach(section => {
       if (window.pageYOffset >= section.offsetTop - 120) {
         current = section.getAttribute("id");
       }
     });
-    navLinks.forEach(function(link) {
+
+    navLinks.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === "#" + current) {
         link.classList.add("active");
@@ -87,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // FADE-UP ANIMATIONS
   // =========================================================
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           observer.unobserve(entry.target);
@@ -96,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }, { threshold: 0.15 });
 
-    fadeUps.forEach(function(el) { observer.observe(el); });
+    fadeUps.forEach(el => observer.observe(el));
   } else {
-    fadeUps.forEach(function(el) { el.classList.add("visible"); });
+    fadeUps.forEach(el => el.classList.add("visible"));
   }
 
   // =========================================================
@@ -121,18 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // FILTERING
   // =========================================================
-  filterButtons.forEach(function(btn) {
-    btn.addEventListener("click", function() {
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
 
       filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      galleryItems.forEach(function(item) {
+      galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
         const show = filter === "all" || category === filter;
-        item.style.display      = show ? "inline-block" : "none";
-        item.style.opacity      = show ? "1" : "0";
+        item.style.display       = show ? "inline-block" : "none";
+        item.style.opacity       = show ? "1" : "0";
         item.style.pointerEvents = show ? "auto" : "none";
       });
 
@@ -143,10 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // LIGHTBOX
   // =========================================================
-  galleryItems.forEach(function(item) {
+  galleryItems.forEach(item => {
     const img = item.querySelector("img");
     if (!img) return;
-    img.addEventListener("click", function() {
+
+    img.addEventListener("click", () => {
       const visible = getVisibleItems();
       currentIndex = visible.indexOf(item);
       openLightbox();
@@ -156,12 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function openLightbox() {
     const visible = getVisibleItems();
     if (!visible.length) return;
+
     const item  = visible[currentIndex];
     const img   = item.querySelector("img");
     const label = item.querySelector(".photo-label");
+
     lightboxImage.src           = img.src;
     lightboxImage.alt           = img.alt;
     lightboxCaption.textContent = label ? label.textContent : "";
+
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
   }
@@ -188,12 +193,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (lightboxNext)  lightboxNext.addEventListener("click", showNext);
 
   if (lightbox) {
-    lightbox.addEventListener("click", function(e) {
+    lightbox.addEventListener("click", e => {
       if (e.target === lightbox) closeLightbox();
     });
   }
 
-  document.addEventListener("keydown", function(e) {
+  document.addEventListener("keydown", e => {
     if (!lightbox || !lightbox.classList.contains("open")) return;
     if (e.key === "Escape")     closeLightbox();
     if (e.key === "ArrowLeft")  showPrev();
@@ -203,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // DEFAULT FILTER ON LOAD
   // =========================================================
-  galleryItems.forEach(function(item) {
+  galleryItems.forEach(item => {
     item.style.display       = "inline-block";
     item.style.opacity       = "1";
     item.style.pointerEvents = "auto";
@@ -220,8 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.querySelector(".contact-form");
 
   if (contactForm) {
-    contactForm.addEventListener("submit", async function(e) {
+    contactForm.addEventListener("submit", async e => {
       e.preventDefault();
+
       const submitBtn = contactForm.querySelector("[type='submit']");
       submitBtn.textContent = "Sending…";
       submitBtn.disabled = true;
@@ -263,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loginBtn && loginModal) {
 
     // Open modal
-    loginBtn.addEventListener("click", function(e) {
+    loginBtn.addEventListener("click", e => {
       e.preventDefault();
       loginModal.style.display = "flex";
       loginPassword.value = "";
@@ -274,19 +280,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Close modal (X)
-    loginClose.addEventListener("click", function() {
+    loginClose.addEventListener("click", () => {
       loginModal.style.display = "none";
     });
 
     // Close when clicking outside modal
-    loginModal.addEventListener("click", function(e) {
+    loginModal.addEventListener("click", e => {
       if (e.target === loginModal) {
         loginModal.style.display = "none";
       }
     });
 
     // Submit password
-    loginSubmit.addEventListener("click", function() {
+    loginSubmit.addEventListener("click", () => {
       const correctPassword = "km2025";
 
       loginError.style.display = "none";
@@ -297,7 +303,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         if (loginPassword.value === correctPassword) {
           window.open(
-            "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0";
+            "https://www.dropbox.com/scl/fo/83zcsw3jh7bs485qasqtv/AEQYlaKfxCKB5IkG4uqxSKU?rlkey=1xvom5ncrhtodgcloaq0d1a3o&dl=0",
+            "_blank"
           );
         } else {
           loginSpinner.style.display = "none";
@@ -306,8 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
           loginError.style.display = "block";
         }
       }, 800);
-  });
+    });
 
-}
-  
+  }
+
 });
