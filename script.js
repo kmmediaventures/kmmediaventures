@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         if (loginPassword.value === correctPassword) {
           window.open(
-            "https://www.dropbox.com/scl/fo/hw2t5u9iilspcdjw29h3u/ALD3ndc2ZShLDdXHNEYmDrk?rlkey=rbcl3hewwicav5f4211x0ovjw&st=8fdsa3b3&dl=0",
+            "https://www.dropbox.com/scl/fo/hw2t5u9iilspcdjw29h3u/ALD3ndc2ZShLDdXHNEYmDrk?rlkey=rbcl3hewwicav5f4211x0ovjw&st=9dmsj8bd&dl=0",
             "_blank"
           );
         } else {
