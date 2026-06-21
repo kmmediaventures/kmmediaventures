@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submit password
     loginSubmit.addEventListener("click", () => {
-      const correctPassword = "km2025";
+      const correctPassword = "acero";
 
       loginError.style.display = "none";
       loginSpinner.style.display = "block";
