@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submit password
     loginSubmit.addEventListener("click", () => {
-      const correctPassword = "acero";
+      const correctPassword = "landon";
 
       loginError.style.display = "none";
       loginSpinner.style.display = "block";
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         if (loginPassword.value === correctPassword) {
           window.open(
-            "https://www.dropbox.com/scl/fo/3rciex29cmin11df2ypt1/AAYQw4xdeX5_Iv97naIPHzY?rlkey=5zx5b8eimqwety41my0nejes1&st=e3px6ln5&dl=0",
+            "https://www.dropbox.com/scl/fo/wowpmh7pveemiz9uosvb8/ABczViRJHF_Ab7XfSqBEtU8?rlkey=g7wub2j3446t53sxxbgcn6w0z&dl=0",
             "_blank"
           );
         } else {
