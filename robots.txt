@@ -1,5 +1,7 @@
+# KM Media Ventures - Robots.txt
+# Allow full crawling and provide sitemap location
+
 User-agent: *
 Allow: /
 
 Sitemap: https://kmmediaventures.github.io/kmmediaventures/sitemap.xml
-
