@@ -426,4 +426,46 @@
   </div>
 
   <script src="script.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const today = new Date().toISOString().split("T")[0];
+
+  function shuffleGallery(selector, storageKey) {
+    const gallery = document.querySelector(selector);
+    if (!gallery) return;
+
+    const items = Array.from(gallery.children);
+
+    const storedDate = localStorage.getItem(storageKey + "_date");
+    const storedOrder = JSON.parse(localStorage.getItem(storageKey + "_order"));
+
+    let order;
+
+    if (storedDate === today && storedOrder) {
+      order = storedOrder;
+    } else {
+      order = items.map((_, i) => i);
+
+      // Fisher-Yates shuffle
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+
+      localStorage.setItem(storageKey + "_date", today);
+      localStorage.setItem(storageKey + "_order", JSON.stringify(order));
+    }
+
+    order.forEach(i => gallery.appendChild(items[i]));
+  }
+
+  // Shuffle Photography gallery (portraits + live + creative)
+  shuffleGallery("#portfolio .gallery-grid", "portfolioShuffle");
+
+  // Shuffle Videography gallery (YouTube embeds)
+  shuffleGallery("#videography .video-grid", "videoShuffle");
+});
+</script>
+  
 </body>
