@@ -270,8 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // To remove a client: delete their line.
   // =========================================================
   const CLIENT_ENTRIES = [
-    // Paste generated entries here, e.g.:
-    // { salt: "xxxxx...", iv: "xxxxx...", data: "xxxxx..." },
+    { salt: "L/A+NVhvt9ZKxWVtUFOU4g==", iv: "r+28IufA7DcIAC4p", data: "iu+Jv8KXkbX24PGFtNLRn0Uz5R48CdC0/D1Y4KOPm+vX8wRbXY6k5ryr2CANX4Ygj0qx5dPhqcMwU4wf/wBHrfUWU2gEYkzfsYhCRSQdnuB7L7gX7CinBA2rgkP1f6t0ApQXdNKv2w==" },
   ];
  
   function base64ToBuf(base64) {
