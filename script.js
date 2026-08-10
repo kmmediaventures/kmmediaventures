@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+ 
   // =========================================================
   // ELEMENT REFERENCES
   // =========================================================
@@ -7,26 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMenu    = document.getElementById("navMenu");
   const homeButton = document.getElementById("homeButton");
   const yearSpan   = document.getElementById("year");
-
+ 
   const filterButtons = document.querySelectorAll(".filter-btn");
   const galleryItems  = document.querySelectorAll(".gallery-item");
-
+ 
   const lightbox        = document.getElementById("lightbox");
   const lightboxImage   = document.getElementById("lightboxImage");
   const lightboxCaption = document.getElementById("lightboxCaption");
   const lightboxClose   = document.getElementById("lightboxClose");
   const lightboxPrev    = document.getElementById("lightboxPrev");
   const lightboxNext    = document.getElementById("lightboxNext");
-
+ 
   const fadeUps = document.querySelectorAll(".fade-up");
-
+ 
   let currentIndex = 0;
-
+ 
   // =========================================================
   // FOOTER YEAR
   // =========================================================
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
+ 
   // =========================================================
   // MOBILE NAV HAMBURGER
   // =========================================================
@@ -34,14 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.addEventListener("click", () => {
       navMenu.classList.toggle("open");
     });
-
+ 
     navMenu.querySelectorAll(".nav-link").forEach(link => {
       link.addEventListener("click", () => {
         navMenu.classList.remove("open");
       });
     });
   }
-
+ 
   // =========================================================
   // FLOATING HOME BUTTON
   // =========================================================
@@ -53,18 +53,18 @@ document.addEventListener("DOMContentLoaded", () => {
         homeButton.classList.remove("visible");
       }
     });
-
+ 
     homeButton.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
-
+ 
   // =========================================================
   // ACTIVE NAV LINK ON SCROLL
   // =========================================================
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("main section[id]");
-
+ 
   function updateActiveNav() {
     let current = "";
     sections.forEach(section => {
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         current = section.getAttribute("id");
       }
     });
-
+ 
     navLinks.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === "#" + current) {
@@ -80,10 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+ 
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
-
+ 
   // =========================================================
   // FADE-UP ANIMATIONS
   // =========================================================
@@ -96,12 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }, { threshold: 0.15 });
-
+ 
     fadeUps.forEach(el => observer.observe(el));
   } else {
     fadeUps.forEach(el => el.classList.add("visible"));
   }
-
+ 
   // =========================================================
   // MASONRY REFLOW
   // =========================================================
@@ -111,24 +111,24 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.style.display = "none";
     requestAnimationFrame(() => { grid.style.display = ""; });
   }
-
+ 
   // =========================================================
   // GET VISIBLE ITEMS
   // =========================================================
   function getVisibleItems() {
     return Array.from(galleryItems).filter(item => item.style.display !== "none");
   }
-
+ 
   // =========================================================
   // FILTERING
   // =========================================================
   filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
-
+ 
       filterButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-
+ 
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
         const show = filter === "all" || category === filter;
@@ -136,75 +136,75 @@ document.addEventListener("DOMContentLoaded", () => {
         item.style.opacity       = show ? "1" : "0";
         item.style.pointerEvents = show ? "auto" : "none";
       });
-
+ 
       masonryReflow();
     });
   });
-
+ 
   // =========================================================
   // LIGHTBOX
   // =========================================================
   galleryItems.forEach(item => {
     const img = item.querySelector("img");
     if (!img) return;
-
+ 
     img.addEventListener("click", () => {
       const visible = getVisibleItems();
       currentIndex = visible.indexOf(item);
       openLightbox();
     });
   });
-
+ 
   function openLightbox() {
     const visible = getVisibleItems();
     if (!visible.length) return;
-
+ 
     const item  = visible[currentIndex];
     const img   = item.querySelector("img");
     const label = item.querySelector(".photo-label");
-
+ 
     lightboxImage.src           = img.src;
     lightboxImage.alt           = img.alt;
     lightboxCaption.textContent = label ? label.textContent : "";
-
+ 
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
   }
-
+ 
   function closeLightbox() {
     lightbox.classList.remove("open");
     document.body.style.overflow = "";
   }
-
+ 
   function showPrev() {
     const visible = getVisibleItems();
     currentIndex = (currentIndex - 1 + visible.length) % visible.length;
     openLightbox();
   }
-
+ 
   function showNext() {
     const visible = getVisibleItems();
     currentIndex = (currentIndex + 1) % visible.length;
     openLightbox();
   }
-
+ 
   if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
   if (lightboxPrev)  lightboxPrev.addEventListener("click", showPrev);
   if (lightboxNext)  lightboxNext.addEventListener("click", showNext);
-
+ 
   if (lightbox) {
     lightbox.addEventListener("click", e => {
       if (e.target === lightbox) closeLightbox();
     });
   }
-
+ 
   document.addEventListener("keydown", e => {
     if (!lightbox || !lightbox.classList.contains("open")) return;
     if (e.key === "Escape")     closeLightbox();
     if (e.key === "ArrowLeft")  showPrev();
     if (e.key === "ArrowRight") showNext();
   });
-
+ 
   // =========================================================
   // DEFAULT FILTER ON LOAD
   // =========================================================
@@ -213,32 +213,32 @@ document.addEventListener("DOMContentLoaded", () => {
     item.style.opacity       = "1";
     item.style.pointerEvents = "auto";
   });
-
+ 
   const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
   if (defaultBtn) defaultBtn.classList.add("active");
-
+ 
   setTimeout(masonryReflow, 50);
-
+ 
   // =========================================================
   // CONTACT FORM
   // =========================================================
   const contactForm = document.querySelector(".contact-form");
-
+ 
   if (contactForm) {
     contactForm.addEventListener("submit", async e => {
       e.preventDefault();
-
+ 
       const submitBtn = contactForm.querySelector("[type='submit']");
       submitBtn.textContent = "Sending…";
       submitBtn.disabled = true;
-
+ 
       try {
         const res = await fetch(contactForm.action, {
           method: "POST",
           body: new FormData(contactForm),
           headers: { Accept: "application/json" }
         });
-
+ 
         if (res.ok) {
           contactForm.innerHTML =
             '<p style="color:var(--accent);font-weight:600;font-size:1.05rem;padding:20px 0;">Thanks! I\'ll be in touch soon.</p>';
@@ -254,10 +254,64 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+ 
   // =========================================================
-  // LOGIN MODAL (FINAL, CLEAN VERSION)
+  // LOGIN MODAL — MULTI-CLIENT, ENCRYPTED
   // =========================================================
+  //
+  // Each entry below was generated by generate-client-link.html
+  // (a local-only tool — never publish that file). Nobody reading
+  // this source can see a password or a gallery link: the entered
+  // password IS the decryption key. Wrong password = decryption
+  // fails, not just a "doesn't match" comparison.
+  //
+  // To add a new client: run generate-client-link.html locally,
+  // paste the line it gives you into this array, then push.
+  // To remove a client: delete their line.
+  // =========================================================
+  const CLIENT_ENTRIES = [
+    // Paste generated entries here, e.g.:
+    // { salt: "xxxxx...", iv: "xxxxx...", data: "xxxxx..." },
+  ];
+ 
+  function base64ToBuf(base64) {
+    const binary = atob(base64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes.buffer;
+  }
+ 
+  async function deriveKey(password, saltBytes) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw", enc.encode(password), { name: "PBKDF2" }, false, ["deriveKey"]
+    );
+    return crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: saltBytes, iterations: 150000, hash: "SHA-256" },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["decrypt"]
+    );
+  }
+ 
+  async function tryDecrypt(password, entry) {
+    try {
+      const salt = new Uint8Array(base64ToBuf(entry.salt));
+      const iv   = new Uint8Array(base64ToBuf(entry.iv));
+      const key  = await deriveKey(password, salt);
+      const plainBuf = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv },
+        key,
+        base64ToBuf(entry.data)
+      );
+      return new TextDecoder().decode(plainBuf);
+    } catch (err) {
+      // Wrong password (or corrupted entry) — AES-GCM auth check failed.
+      return null;
+    }
+  }
+ 
   const loginBtn      = document.getElementById("clientLoginBtn");
   const loginModal    = document.getElementById("loginModal");
   const loginClose    = document.getElementById("loginClose");
@@ -265,9 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginError    = document.getElementById("loginError");
   const loginPassword = document.getElementById("loginPassword");
   const loginSpinner  = document.getElementById("loginSpinner");
-
+ 
   if (loginBtn && loginModal) {
-
+ 
     // Open modal
     loginBtn.addEventListener("click", e => {
       e.preventDefault();
@@ -278,43 +332,50 @@ document.addEventListener("DOMContentLoaded", () => {
       loginSubmit.disabled = false;
       loginSubmit.style.opacity = "1";
     });
-
+ 
     // Close modal (X)
     loginClose.addEventListener("click", () => {
       loginModal.style.display = "none";
     });
-
+ 
     // Close when clicking outside modal
     loginModal.addEventListener("click", e => {
       if (e.target === loginModal) {
         loginModal.style.display = "none";
       }
     });
-
+ 
     // Submit password
-    loginSubmit.addEventListener("click", () => {
-      const correctPassword = "landon";
-
+    loginSubmit.addEventListener("click", async () => {
+      const entered = loginPassword.value;
+ 
       loginError.style.display = "none";
       loginSpinner.style.display = "block";
       loginSubmit.disabled = true;
       loginSubmit.style.opacity = "0.5";
-
-      setTimeout(() => {
-        if (loginPassword.value === correctPassword) {
-          window.open(
-            "https://www.dropbox.com/scl/fo/wowpmh7pveemiz9uosvb8/ABczViRJHF_Ab7XfSqBEtU8?rlkey=g7wub2j3446t53sxxbgcn6w0z&dl=0",
-            "_blank"
-          );
-        } else {
-          loginSpinner.style.display = "none";
-          loginSubmit.disabled = false;
-          loginSubmit.style.opacity = "1";
-          loginError.style.display = "block";
-        }
-      }, 800);
+ 
+      let destination = null;
+      for (const entry of CLIENT_ENTRIES) {
+        destination = await tryDecrypt(entered, entry);
+        if (destination) break;
+      }
+ 
+      loginSpinner.style.display = "none";
+      loginSubmit.disabled = false;
+      loginSubmit.style.opacity = "1";
+ 
+      if (destination) {
+        window.open(destination, "_blank");
+      } else {
+        loginError.style.display = "block";
+      }
     });
-
+ 
+    // Allow Enter key to submit
+    loginPassword.addEventListener("keydown", e => {
+      if (e.key === "Enter") loginSubmit.click();
+    });
   }
-
+ 
 });
+ 
