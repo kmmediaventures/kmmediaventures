@@ -270,9 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // To remove a client: delete their line.
   // =========================================================
   const CLIENT_ENTRIES = [
-    { 
-     
-     salt: "3jYJcv3q1GQwcD82UUjJSQ==", iv: "PD9N9Qy+IPLbAteb", data: "1EhWYAwc1RgTKU4PqDXmgJUEblCLUsKCXa/tmk+EQgEjEzHm7wfqq5eNR1qJ0NFMUiL+A1Md9tBiTl26VBdMd/fzcBIjoLU0ZobxTuLGF8A="  
+    { salt: "L/A+NVhvt9ZKxWVtUFOU4g==", iv: "r+28IufA7DcIAC4p", data: "iu+Jv8KXkbX24PGFtNLRn0Uz5R48CdC0/D1Y4KOPm+vX8wRbXY6k5ryr2CANX4Ygj0qx5dPhqcMwU4wf/wBHrfUWU2gEYkzfsYhCRSQdnuB7L7gX7CinBA2rgkP1f6t0ApQXdNKv2w==" }
   ];
  
   function base64ToBuf(base64) {
