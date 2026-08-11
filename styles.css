@@ -142,7 +142,7 @@ h1, h2, h3 {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.35s ease;
-        z-index: 2000;
+        z-index: 998;
     }
  
     .nav-menu.open {
@@ -469,7 +469,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 99999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
