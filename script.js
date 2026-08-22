@@ -326,7 +326,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Open modal
     loginBtn.addEventListener("click", e => {
       e.preventDefault();
-      loginModal.style.display = "flex";
+      loginModal.classList.add("open");
+loginModal.style.display = "flex";
+
+     
       loginPassword.value = "";
       loginError.style.display = "none";
       loginSpinner.style.display = "none";
@@ -336,7 +339,10 @@ document.addEventListener("DOMContentLoaded", () => {
  
     // Close modal (X)
     loginClose.addEventListener("click", () => {
-      loginModal.style.display = "none";
+     loginModal.classList.remove("open");
+loginModal.style.display = "none";
+
+     
     });
  
     // Close when clicking outside modal
