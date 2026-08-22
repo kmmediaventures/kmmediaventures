@@ -750,6 +750,10 @@ main {
     z-index: 9999;
     animation: fadeIn 0.25s ease-out;
 }
+
+.login-modal:not(.open) {
+    pointer-events: none;
+}
  
 .login-content {
     background: #111;
