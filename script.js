@@ -334,17 +334,48 @@ document.addEventListener("DOMContentLoaded", () => {
       loginSpinner.style.display = "none";
       loginSubmit.disabled = false;
       loginSubmit.style.opacity = "1";
+      loginPassword.focus();
     });
  
-    // Close modal (X)
-    loginClose.addEventListener("click", () => {
+    // Shared close logic — hides the modal and returns focus to the trigger
+    function closeLoginModal() {
       loginModal.style.display = "none";
-    });
+      loginBtn.focus();
+    }
+ 
+    // Close modal (X)
+    loginClose.addEventListener("click", closeLoginModal);
  
     // Close when clicking outside modal
     loginModal.addEventListener("click", e => {
       if (e.target === loginModal) {
-        loginModal.style.display = "none";
+        closeLoginModal();
+      }
+    });
+ 
+    // Close on Escape
+    loginModal.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeLoginModal();
+    });
+ 
+    // Trap Tab/Shift+Tab so focus stays inside the modal while it's open
+    loginModal.addEventListener("keydown", e => {
+      if (e.key !== "Tab") return;
+ 
+      const focusable = loginModal.querySelectorAll(
+        'input:not([disabled]), button:not([disabled])'
+      );
+      if (!focusable.length) return;
+ 
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+ 
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     });
  
@@ -381,3 +412,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
  
 });
+ 
+ 
