@@ -1,5 +1,3 @@
-
-Script · JS
 document.addEventListener("DOMContentLoaded", () => {
  
   // =========================================================
