@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kmmediaventures.github.io/kmmediaventures/sitemap.xml
+Sitemap: https://kmmediaventures.github.io/portfolio/sitemap.xml
