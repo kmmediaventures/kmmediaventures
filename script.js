@@ -208,13 +208,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // DEFAULT FILTER ON LOAD
   // =========================================================
+  const defaultFilter = "portrait";
+ 
   galleryItems.forEach(item => {
-    item.style.display       = "inline-block";
-    item.style.opacity       = "1";
-    item.style.pointerEvents = "auto";
+    const category = item.getAttribute("data-category");
+    const show = defaultFilter === "all" || category === defaultFilter;
+    item.style.display       = show ? "inline-block" : "none";
+    item.style.opacity       = show ? "1" : "0";
+    item.style.pointerEvents = show ? "auto" : "none";
   });
  
-  const defaultBtn = document.querySelector('.filter-btn[data-filter="portrait"]');
+  const defaultBtn = document.querySelector(`.filter-btn[data-filter="${defaultFilter}"]`);
   if (defaultBtn) defaultBtn.classList.add("active");
  
   setTimeout(masonryReflow, 50);
@@ -270,10 +274,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // To remove a client: delete their line.
   // =========================================================
   const CLIENT_ENTRIES = [
-    const CLIENT_ENTRIES = [
-  { salt: "...", iv: "...", data: "..." },
-  { salt: "NEW_SALT", iv: "NEW_IV", data: "NEW_DATA" }
-];
+    { salt: "L/A+NVhvt9ZKxWVtUFOU4g==", iv: "r+28IufA7DcIAC4p", data: "iu+Jv8KXkbX24PGFtNLRn0Uz5R48CdC0/D1Y4KOPm+vX8wRbXY6k5ryr2CANX4Ygj0qx5dPhqcMwU4wf/wBHrfUWU2gEYkzfsYhCRSQdnuB7L7gX7CinBA2rgkP1f6t0ApQXdNKv2w==" }
+  ];
  
   function base64ToBuf(base64) {
     const binary = atob(base64);
@@ -326,10 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Open modal
     loginBtn.addEventListener("click", e => {
       e.preventDefault();
-      loginModal.classList.add("open");
-loginModal.style.display = "flex";
-
-     
+      loginModal.style.display = "flex";
       loginPassword.value = "";
       loginError.style.display = "none";
       loginSpinner.style.display = "none";
@@ -339,10 +338,7 @@ loginModal.style.display = "flex";
  
     // Close modal (X)
     loginClose.addEventListener("click", () => {
-     loginModal.classList.remove("open");
-loginModal.style.display = "none";
-
-     
+      loginModal.style.display = "none";
     });
  
     // Close when clicking outside modal
@@ -372,7 +368,7 @@ loginModal.style.display = "none";
       loginSubmit.style.opacity = "1";
  
       if (destination) {
-        window.open(destination, "_blank");
+        window.open(destination, "_blank", "noopener");
       } else {
         loginError.style.display = "block";
       }
@@ -385,4 +381,3 @@ loginModal.style.display = "none";
   }
  
 });
- 
