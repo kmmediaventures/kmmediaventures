@@ -751,10 +751,6 @@ main {
     animation: fadeIn 0.25s ease-out;
 }
 
-/* ⭐ REQUIRED FIX */
-.login-modal:not(.open) {
-    pointer-events: none;
-}
  
 .login-content {
     background: #111;
