@@ -264,12 +264,21 @@ document.addEventListener("DOMContentLoaded", () => {
      LOGIN MODAL (UNCHANGED)
      ========================================================= */
   const CLIENT_ENTRIES = [
-      { 
-        salt: "jNuSkaNp6Yfxt8NfDPszXQ==", 
-        iv: "fQBN68Izx44qf+Ll", 
-        data: "7cfjt/OhTxzwruWsB+CKDctGKSbMD7rXeasoAyd6SbABsSui3SNYJdDK+kG5NHE8uofCJs8paMic4g==" 
-      } 
-    ];  
+       { 
+         salt: "xEgbyXuzIr4oBNVIN7tPxg==", 
+         iv: "vkVOLIauHxC4JoVR", 
+         data: "idliaLqLErk+eY4fCe4VviVKqtnT6DcwZhFpAF7rch1LqVcxdJ9LhfcUi9jNOXmLsuFsuProKZaTGOfnan5DVcFZUnM=" 
+       },
+
+    {
+        salt: "7HWRgJ5QwzUJizGQtZmf/Q==", 
+        iv: "NupfmyYIa56FmlA/", 
+        data: "YUG3bzKBqCdhRecWiZb3ZZD0ocWEGn0VW25LF5rxcIXohLrrxijsW+fqoVVEBmLbnpbG8PvHwCc8VA=="
+
+    },
+    
+    ];
+    
     
 
   function base64ToBuf(base64) {
