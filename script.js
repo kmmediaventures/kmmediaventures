@@ -264,8 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
      LOGIN MODAL (UNCHANGED)
      ========================================================= */
   const CLIENT_ENTRIES = [
-    { salt: "L/A+NVhvt9ZKxWVtUFOU4g==", iv: "r+28IufA7DcIAC4p", data: "iu+Jv8KXkbX24PGFtNLRn0Uz5R48CdC0/D1Y4KOPm+vX8wRbXY6k5ryr2CANX4Ygj0qx5dPhqcMwU4wf/wBHrfUWU2gEYkzfsYhCRSQdnuB7L7gX7CinBA2rgkP1f6t0ApQXdNKv2w==" }
-  ];
+      { salt: "Kl1IsSNyPqqVkrVLuq3h0A==", iv: "fAGyZ2/7+6FNOhke", data: "+/b1UUNXdBnfbHXx1FJquI1IC0dvHdzp1tZeEQ2F4WBRx7xsIRi/5ghbdhy7C5L0heAiCCj0IrraPA==" },
 
   function base64ToBuf(base64) {
     const binary = atob(base64);
