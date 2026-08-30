@@ -264,15 +264,22 @@ document.addEventListener("DOMContentLoaded", () => {
      LOGIN MODAL
      ========================================================= */
   const CLIENT_ENTRIES = [
-
-    /*----- Login #1 -----*/
     
-       { 
-         salt: "RPPceFdNl65BBr3cAwCFAw==", 
-         iv: "ZESWg5Yh4svysxui", 
-         data: "0WRYKM+y2TTiwtYyySBm54PWfXlqfuKvmlXV1uOh80PUQ/xg4e3bjAft1fafvHQqQqVt12GUnVO8S9gUUreh9lA1ZNw="
-       }    
-    ];
+      /*----- Login #1 -----*/
+  {
+    salt: "mJwg97ENuM9m8QBD5DJMJw==", 
+    iv: "HWxDHtTkJXEZxUJv", 
+    data: "hMBVURKkKAYeHwW8MeGOK2gWDcVedWn0WEIRKdir5ABrWygji1Trsvjr9uSajnFnKmCnlgmAwBSJMgpLG/hl0f6iDIs=" 
+  },
+
+  /*----- Login #2 -----*/
+  {
+    salt: "PUT_SECOND_SALT_HERE",
+    iv: "PUT_SECOND_IV_HERE",
+    data: "PUT_SECOND_DATA_HERE"
+  }
+
+];
     
     
 
