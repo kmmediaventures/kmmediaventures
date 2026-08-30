@@ -220,6 +220,13 @@ galleryItems.forEach(item => {
  
   const defaultBtn = document.querySelector(`.filter-btn[data-filter="${defaultFilter}"]`);
   if (defaultBtn) defaultBtn.classList.add("active");
+
+galleryItems.forEach(item => {
+    const category = item.getAttribute("data-category");
+    const show = category === "portrait";
+    item.style.display = show ? "block" : "none";
+});
+ 
  
   setTimeout(masonryReflow, 50);
  
