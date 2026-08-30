@@ -736,45 +736,130 @@ main {
     }
 }
 
-/* =========================================================
-   LOGIN MODAL
-   ========================================================= */
+/* LOGIN BUTTON */
+.login-trigger {
+  padding: 12px 22px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin: 40px auto;
+  display: block;
+}
+
+.login-trigger:hover {
+  background: var(--accent-dark);
+}
+
+/* MODAL OVERLAY */
 .login-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-.login-content {
-    background: #111;
-    padding: 30px 25px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    color: #fff;
-    position: relative;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+/* MODAL BOX */
+.login-box {
+  background: #fff;
+  padding: 40px;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  position: relative;
+  animation: fadeUp 0.4s ease forwards;
 }
 
-.login-content h2 {
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    font-weight: 600;
+/* CLOSE BUTTON */
+.login-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #777;
+  transition: 0.2s;
 }
 
-.login-content .close {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 1.4rem;
-    color: var(--muted);
-    cursor: pointer;
+.login-close:hover {
+  color: var(--accent);
 }
 
-#loginPassword
+/* TITLES */
+.login-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.login-subtitle {
+  margin: 10px 0 20px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* INPUT */
+.login-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+/* ERROR */
+.login-error {
+  display: none;
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+/* SPINNER */
+.login-spinner {
+  display: none;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #ddd;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  margin: 10px auto;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* SUBMIT BUTTON */
+.login-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.login-submit:hover {
+  background: var(--accent-dark);
+}
+
+/* FADE-UP ANIMATION */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
