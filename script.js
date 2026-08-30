@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const plainBuf = await crypto.subtle.decrypt(
         { name: "AES-GCM", iv },
         key,
-        base64ToBuf(entry.data)
+        new Uint8Array(base64ToBuf(entry.data))
       );
       return new TextDecoder().decode(plainBuf);
     } catch (err) {
