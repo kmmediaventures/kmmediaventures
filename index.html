@@ -391,26 +391,37 @@
     </div>
   </footer>
   
-  <!-- LOGIN MODAL -->
-  <div id="loginModal" class="login-modal">
-    <div class="login-content">
-      <span id="loginClose" class="close">&times;</span>
+ <!-- CLIENT LOGIN BUTTON -->
+<button id="clientLoginBtn" class="login-trigger fade-up">
+  Client Login
+</button>
 
-      <h2>Login</h2>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="login-modal">
+  <div class="login-box fade-up">
+    <span id="loginClose" class="login-close">&times;</span>
 
-      <input type="password" id="loginPassword" placeholder="Enter password">
+    <h2 class="login-title">Client Access</h2>
+    <p class="login-subtitle">Enter your password to open your gallery.</p>
 
-      <button id="loginSubmit">Enter</button>
-      <div class="login-spinner" id="loginSpinner"></div>
-      
-      <p id="loginError" style="color:red;display:none;margin-top:10px;">
-        Incorrect password
-      </p>
+    <input 
+      id="loginPassword" 
+      type="password" 
+      placeholder="Password" 
+      class="login-input"
+    />
 
-      <p class="login-tip" style="margin-top:15px;font-size:0.9rem;color:#888;">
-      </p>  
-    </div>
+    <div id="loginError" class="login-error">Incorrect password</div>
+
+    <div id="loginSpinner" class="login-spinner"></div>
+
+    <button id="loginSubmit" class="login-submit">
+      Unlock Gallery
+    </button>
   </div>
+</div>
+
+  
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
