@@ -210,13 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   const defaultFilter = "portrait";
  
-  galleryItems.forEach(item => {
+galleryItems.forEach(item => {
     const category = item.getAttribute("data-category");
-    const show = defaultFilter === "all" || category === defaultFilter;
-    item.style.display       = show ? "inline-block" : "none";
+    const show = category === filter;   // FIXED — no "all" filter
+    item.style.display       = show ? "block" : "none";
     item.style.opacity       = show ? "1" : "0";
     item.style.pointerEvents = show ? "auto" : "none";
-  });
+});
  
   const defaultBtn = document.querySelector(`.filter-btn[data-filter="${defaultFilter}"]`);
   if (defaultBtn) defaultBtn.classList.add("active");
