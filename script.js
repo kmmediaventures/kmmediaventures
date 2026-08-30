@@ -274,9 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // To remove a client: delete their line.
   // =========================================================
   const CLIENT_ENTRIES = [
-    { salt: "L/A+NVhvt9ZKxWVtUFOU4g==", iv: "r+28IufA7DcIAC4p", data: "iu+Jv8KXkbX24PGFtNLRn0Uz5R48CdC0/D1Y4KOPm+vX8wRbXY6k5ryr2CANX4Ygj0qx5dPhqcMwU4wf/wBHrfUWU2gEYkzfsYhCRSQdnuB7L7gX7CinBA2rgkP1f6t0ApQXdNKv2w==" },
-    { salt: "GL2oO6t6HukiKkGu+W2ZhA==", iv: "N7R87gN1RHnXD5/b", data: "yDV9BSiMVwDqjnm7Ax84zcniBOQgWwtVua1WaKC6AwcDGQAuTJH+x2afoN1qDbdB1yjQDhFHV3Xc" }
-  ];
+    { salt: "A7hwstjNSAq0Dr2A5XKb4g==", iv: "qkuEt4h9XBD/D4KC", data: "PNEA/8tFR/wDTyRJXY2GpipIM9Nu8JQxrFuJKmZJjYBFivfeDJYibaXUQfRHw1KgXNhkmP1ECEvEow==" },
  
   function base64ToBuf(base64) {
     const binary = atob(base64);
