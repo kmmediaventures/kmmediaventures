@@ -261,15 +261,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     LOGIN MODAL (UNCHANGED)
+     LOGIN MODAL
      ========================================================= */
   const CLIENT_ENTRIES = [
+
+    /*----- Login #1 -----*/
        { 
          salt: "xEgbyXuzIr4oBNVIN7tPxg==", 
          iv: "vkVOLIauHxC4JoVR", 
          data: "idliaLqLErk+eY4fCe4VviVKqtnT6DcwZhFpAF7rch1LqVcxdJ9LhfcUi9jNOXmLsuFsuProKZaTGOfnan5DVcFZUnM=" 
        },
 
+    /*----- Login #2 -----*/
     {
         salt: "7HWRgJ5QwzUJizGQtZmf/Q==", 
         iv: "NupfmyYIa56FmlA/", 
