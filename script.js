@@ -274,9 +274,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /*----- Login #2 -----*/
   {
-    salt: "PUT_SECOND_SALT_HERE",
-    iv: "PUT_SECOND_IV_HERE",
-    data: "PUT_SECOND_DATA_HERE"
+    salt: "5m4vi/fQJEjv2OaBFLxMkQ==", 
+    iv: "siY5crYMxfh0Vxg4", 
+    data: "+CAmluURkpYuryrEFLAK2xoFOkeW2zmRWyePLxQSViItAkCKCLnL0J9n9nvPXv0avCN5lT9xrx59"
   }
 
 ];
