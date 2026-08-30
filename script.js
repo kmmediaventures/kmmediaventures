@@ -267,17 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
       /*----- Login #1 -----*/
   {
-    salt: "+4plD+1e/bmYdZz03uLAwA==", 
-    iv: "JAM72iwnl+oT+kWE", 
-    data: "92Vw9L/mWV8uVgFFryUykSqJ2UE39Sd9G2wfJiNxygJf65vUlRtD9fv6x9hvP9yAVM5I30/Z1L+vN6dIaS8tMzUfS6w="  
+    salt: "+uGdygr4qV0MBZLSDMt3iw==", 
+    iv: "WqTyamaaT1Qf8R2g", 
+    data: "HOi/2E09QD46vN3KCCI9qXRolgmI6CF81E3Y8gCKmLVD4W1P+2n084i3LVtq1QHaT+HY9GVKdiQ0"   
   },
-
-  /*----- Login #2 -----*/
-  {
-    salt: "5m4vi/fQJEjv2OaBFLxMkQ==", 
-    iv: "siY5crYMxfh0Vxg4", 
-    data: "+CAmluURkpYuryrEFLAK2xoFOkeW2zmRWyePLxQSViItAkCKCLnL0J9n9nvPXv0avCN5lT9xrx59"
-  }
 
 ];
     
