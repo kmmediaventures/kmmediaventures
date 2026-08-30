@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
       galleryItems.forEach(item => {
         const category = item.getAttribute("data-category");
-        const show = filter === "all" || category === filter;
+        const show = category === filter;
         item.style.display       = show ? "inline-block" : "none";
         item.style.opacity       = show ? "1" : "0";
         item.style.pointerEvents = show ? "auto" : "none";
