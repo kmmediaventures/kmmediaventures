@@ -6,7 +6,6 @@
     --bg-panel: #11141b;
     --bg-card: #151820;
     --accent: #e63946;
-    --accent-soft: #f1a1aa;
     --accent-teal: #2ec4b6;
     --accent-teal-hover: #21a89a;
     --text-main: #ffffff;
@@ -119,7 +118,7 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   MOBILE NAV
+   MOBILE NAV — SLIDE DOWN
    ========================================================= */
 .nav-toggle {
     display: none;
@@ -131,9 +130,10 @@ h1, h2, h3 {
 }
 
 @media (max-width: 768px) {
+
     .nav-menu {
         position: absolute;
-        top: 100%; /* FIXED — menu now appears below header */
+        top: calc(100% + 2px); /* FIX: always below header */
         right: 0;
         width: 100%;
         background: var(--bg-panel);
@@ -433,7 +433,7 @@ main {
     border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--bg-card);
-    display: inline-block;
+    display: block; /* FIXED */
     width: 100%;
     cursor: pointer;
     transition: transform 0.25s ease, opacity 0.3s ease;
@@ -748,7 +748,6 @@ main {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    animation: fadeIn 0.25s ease-out;
 }
 
 .login-content {
@@ -761,7 +760,6 @@ main {
     color: #fff;
     position: relative;
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    animation: slideUp 0.3s ease-out;
 }
 
 .login-content h2 {
@@ -775,11 +773,8 @@ main {
     top: 12px;
     right: 16px;
     font-size: 1.4rem;
-    line-height: 1;
     color: var(--muted);
     cursor: pointer;
-    transition: color 0.2s ease;
 }
 
-.login-content .close:hover {
-    color:
+#loginPassword
