@@ -266,19 +266,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const CLIENT_ENTRIES = [
 
     /*----- Login #1 -----*/
-       { 
-         salt: "xEgbyXuzIr4oBNVIN7tPxg==", 
-         iv: "vkVOLIauHxC4JoVR", 
-         data: "idliaLqLErk+eY4fCe4VviVKqtnT6DcwZhFpAF7rch1LqVcxdJ9LhfcUi9jNOXmLsuFsuProKZaTGOfnan5DVcFZUnM=" 
-       },
+    
+       { salt: "RPPceFdNl65BBr3cAwCFAw==", 
+         iv: "ZESWg5Yh4svysxui", 
+         data: "0WRYKM+y2TTiwtYyySBm54PWfXlqfuKvmlXV1uOh80PUQ/xg4e3bjAft1fafvHQqQqVt12GUnVO8S9gUUreh9lA1ZNw="
 
     /*----- Login #2 -----*/
-    {
-        salt: "7HWRgJ5QwzUJizGQtZmf/Q==", 
-        iv: "NupfmyYIa56FmlA/", 
-        data: "YUG3bzKBqCdhRecWiZb3ZZD0ocWEGn0VW25LF5rxcIXohLrrxijsW+fqoVVEBmLbnpbG8PvHwCc8VA=="
 
-    },
+
+    
     
     ];
     
