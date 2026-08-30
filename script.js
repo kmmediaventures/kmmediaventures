@@ -264,8 +264,12 @@ document.addEventListener("DOMContentLoaded", () => {
      LOGIN MODAL (UNCHANGED)
      ========================================================= */
   const CLIENT_ENTRIES = [
-      { salt: "jNuSkaNp6Yfxt8NfDPszXQ==", iv: "fQBN68Izx44qf+Ll", data: "7cfjt/OhTxzwruWsB+CKDctGKSbMD7rXeasoAyd6SbABsSui3SNYJdDK+kG5NHE8uofCJs8paMic4g==" }, 
-      
+      { 
+        salt: "jNuSkaNp6Yfxt8NfDPszXQ==", 
+        iv: "fQBN68Izx44qf+Ll", 
+        data: "7cfjt/OhTxzwruWsB+CKDctGKSbMD7rXeasoAyd6SbABsSui3SNYJdDK+kG5NHE8uofCJs8paMic4g==" 
+      } 
+    ];  
     
 
   function base64ToBuf(base64) {
