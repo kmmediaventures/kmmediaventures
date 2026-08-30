@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function tryDecrypt(password, entry) {
     try {
       const salt = new Uint8Array(base64ToBuf(entry.salt));
-      const iv   = new Uint8Array(base64ToBuf(entry.iv));
+      const ivBytes = new Uint8Array(new Uint8Array(base64ToBuf(entry.iv)));
       const key  = await deriveKey(password, salt);
       const plainBuf = await crypto.subtle.decrypt(
         { name: "AES-GCM", iv },
